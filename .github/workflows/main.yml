@@ -32,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'java', 'javascript' ]
+        language: [ 'java' ]
         # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
         # Learn more about CodeQL language support at https://git.io/codeql-language-support
 
@@ -80,8 +80,23 @@ jobs:
     #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+    - name: Cache SonarCloud packages
+      uses: actions/cache@v1
+      with:
+        path: ~/.sonar/cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
+        
+    - name: Cache Maven packages
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+        
     - name: Analyze with SonarCloud
       run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=shelbys-restaurant -Dsonar.organization=shelbys-restaurant -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -DskipTests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        

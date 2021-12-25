@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "3bfd9563-b8c5-418e-8a49-137f5970bccc",
+		"name": "Shelby's restaurant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/shelbys-restaurant/actuator/health",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"shelbys-restaurant",
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

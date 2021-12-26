@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>Persistence</ID>
+  <OriginalElement>JavaeeElement:/17c5b98d/entityManagerFactory/shelbys-restaurant/jpa/JPA/PersistenceModel</OriginalElement>
+  <nodes>
+    <node x="240.625" y="0.0">Address#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/address/Address.java</node>
+    <node x="158.0" y="531.0">Order#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/order/Order.java</node>
+    <node x="273.375" y="216.0">User#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/user/User.java</node>
+    <node x="0.0" y="498.0">Product#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/product/Product.java</node>
+    <node x="85.25" y="756.0">OrderProducts#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/ordersproducts/OrderProducts.java</node>
+    <node x="323.0" y="531.0">ConfirmationToken#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/token/ConfirmationToken.java</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="OrderProducts#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/ordersproducts/OrderProducts.java" target="Order#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/order/Order.java" relationship="RELATION">
+      <point x="0.0" y="-27.0" />
+      <point x="149.75" y="731.0" />
+      <point x="230.5" y="731.0" />
+      <point x="0.0" y="71.0" />
+    </edge>
+    <edge source="ConfirmationToken#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/token/ConfirmationToken.java" target="User#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/user/User.java" relationship="RELATION">
+      <point x="0.0" y="-71.0" />
+      <point x="419.0" y="472.0" />
+      <point x="350.375" y="472.0" />
+      <point x="0.0" y="115.0" />
+    </edge>
+    <edge source="OrderProducts#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/ordersproducts/OrderProducts.java" target="Product#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/product/Product.java" relationship="RELATION">
+      <point x="0.0" y="-27.0" />
+      <point x="149.75" y="731.0" />
+      <point x="69.0" y="731.0" />
+      <point x="0.0" y="104.0" />
+    </edge>
+    <edge source="Order#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/order/Order.java" target="User#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/user/User.java" relationship="RELATION">
+      <point x="36.25" y="-71.0" />
+      <point x="266.75" y="472.0" />
+      <point x="350.375" y="472.0" />
+      <point x="0.0" y="115.0" />
+    </edge>
+    <edge source="Order#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/order/Order.java" target="Address#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/address/Address.java" relationship="EMBEDDING">
+      <point x="-36.25" y="-71.0" />
+      <point x="194.25" y="472.0" />
+      <point x="225.5" y="472.0" />
+      <point x="225.5" y="190.0" />
+      <point x="306.625" y="190.0" />
+      <point x="0.0" y="82.0" />
+    </edge>
+    <edge source="User#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/user/User.java" target="Address#file://E:/Data/Projects/Java/shelbys-restaurant/src/main/java/com/shelby/restaurant/shelbysrestaurant/model/address/Address.java" relationship="EMBEDDING">
+      <point x="0.0" y="-115.0" />
+      <point x="350.375" y="190.0" />
+      <point x="306.625" y="190.0" />
+      <point x="0.0" y="82.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.7963855421686747" showDependencies="false" x="257.5" y="405.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Embeddables</Category>
+    <Category>Properties</Category>
+  </Categories>
+</Diagram>
+

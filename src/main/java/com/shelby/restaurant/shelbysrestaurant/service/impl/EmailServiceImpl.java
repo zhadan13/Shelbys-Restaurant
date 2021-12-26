@@ -1,5 +1,6 @@
-package com.shelby.restaurant.shelbysrestaurant.service.email;
+package com.shelby.restaurant.shelbysrestaurant.service.impl;
 
+import com.shelby.restaurant.shelbysrestaurant.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class EmailService implements EmailSender {
+public class EmailServiceImpl implements EmailService {
 
     private final JavaMailSender mailSender;
 

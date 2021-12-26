@@ -1,16 +1,16 @@
 package com.shelby.restaurant.shelbysrestaurant.controller;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping
 public class AuthController {
 
-    /*@GetMapping
-    public String login() {
-        return "login";
-    }*/
+    @GetMapping
+    public ResponseEntity<?> login() {
+        return ResponseEntity.ok("Login");
+    }
 }

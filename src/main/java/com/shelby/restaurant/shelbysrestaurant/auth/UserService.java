@@ -1,6 +1,8 @@
 package com.shelby.restaurant.shelbysrestaurant.auth;
 
 import com.shelby.restaurant.shelbysrestaurant.model.User;
+import com.shelby.restaurant.shelbysrestaurant.registration.token.model.ConfirmationToken;
+import com.shelby.restaurant.shelbysrestaurant.registration.token.service.ConfirmationTokenService;
 import com.shelby.restaurant.shelbysrestaurant.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +21,7 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    // private final ConfirmationTokenService confirmationTokenService;
+    private final ConfirmationTokenService confirmationTokenService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -27,26 +29,26 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
 
-    /*
-    public String signUpUser(User appUser) {
-        userRepository.findByEmail(appUser.getEmail()).orElseThrow(() -> new IllegalStateException("Email already taken!"));
+    public String signUpUser(User user) {
+        userRepository.findUserByEmail(user.getEmail()).orElseThrow(() -> new IllegalStateException("Email already taken!"));
 
-        String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
-        appUser.setPassword(encodedPassword);
-        userRepository.save(appUser);
+        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
 
         String token = UUID.randomUUID().toString();
-        ConfirmationToken confirmationToken = new ConfirmationToken(
-                token,
-                LocalDateTime.now(),
-                LocalDateTime.now().plusMinutes(15),
-                appUser
-        );
+        ConfirmationToken confirmationToken = ConfirmationToken.builder()
+                .token(token)
+                .createdAt(LocalDateTime.now())
+                .expiresAt(LocalDateTime.now().plusMinutes(30))
+                .user(user)
+                .build();
+
         confirmationTokenService.saveConfirmationToken(confirmationToken);
         return token;
-    }*/
+    }
 
-    /*public void enableUser(String email) {
+    public void enableUser(String email) {
         userRepository.enableUser(email);
-    }*/
+    }
 }

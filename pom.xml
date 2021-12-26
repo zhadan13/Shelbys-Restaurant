@@ -82,7 +82,7 @@
     </dependencies>
 
     <build>
-        <finalName>Shelby's Restaurant</finalName>
+        <finalName>Shelbys-Restaurant</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

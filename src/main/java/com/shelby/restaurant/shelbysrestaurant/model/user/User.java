@@ -1,5 +1,6 @@
 package com.shelby.restaurant.shelbysrestaurant.model.user;
 
+import com.shelby.restaurant.shelbysrestaurant.model.address.Address;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,6 +25,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -34,13 +37,19 @@ public class User implements UserDetails {
     private String phoneNumber;
 
     private String password;
+
     private String firstName;
+
     private String lastName;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @Embedded
+    private Address address;
+
     private Boolean locked = false;
+
     private Boolean enabled = false;
 
     public User(String email, String phoneNumber, String password, String firstName, String lastName, UserRole role) {

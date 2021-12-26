@@ -8,7 +8,7 @@ import com.shelby.restaurant.shelbysrestaurant.controller.resource.RegistrationR
 import com.shelby.restaurant.shelbysrestaurant.service.RegistrationService;
 import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
 import com.shelby.restaurant.shelbysrestaurant.service.ConfirmationTokenService;
-import com.shelby.restaurant.shelbysrestaurant.service.email.EmailValidator;
+import com.shelby.restaurant.shelbysrestaurant.service.validation.EmailValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,11 @@
 package com.shelby.restaurant.shelbysrestaurant.model.token;
 
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +22,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class ConfirmationToken {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -34,6 +39,6 @@ public class ConfirmationToken {
     private LocalDateTime confirmedAt;
 
     @ManyToOne
-    @JoinColumn(nullable = false, name = "user_id")
+    @JoinColumn(nullable = false, referencedColumnName = "id")
     private User user;
 }

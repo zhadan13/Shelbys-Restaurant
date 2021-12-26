@@ -11,15 +11,87 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/shelbys-restaurant/actuator/health",
+					"raw": "{{HOST}}/{{PATH}}/actuator/health",
 					"host": [
-						"localhost"
+						"{{HOST}}"
 					],
-					"port": "8080",
 					"path": [
-						"shelbys-restaurant",
+						"{{PATH}}",
 						"actuator",
 						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actuator",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/{{PATH}}/actuator",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{PATH}}",
+						"actuator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "home",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/{{PATH}}/home",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{PATH}}",
+						"home"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "swagger",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/{{PATH}}/v3/api-docs",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{PATH}}",
+						"v3",
+						"api-docs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "swagger ui",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/{{PATH}}/swagger-ui.html",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{PATH}}",
+						"swagger-ui.html"
 					]
 				}
 			},

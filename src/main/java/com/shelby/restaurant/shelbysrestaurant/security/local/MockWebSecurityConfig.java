@@ -5,8 +5,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@ConditionalOnProperty(name = "security.enabled", havingValue = "false")
 @EnableWebSecurity
+@ConditionalOnProperty(name = "security.enabled", havingValue = "false")
 public class MockWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {

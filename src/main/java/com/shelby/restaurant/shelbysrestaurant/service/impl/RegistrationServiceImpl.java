@@ -1,7 +1,7 @@
 package com.shelby.restaurant.shelbysrestaurant.service.impl;
 
 import com.shelby.restaurant.shelbysrestaurant.auth.UserService;
-import com.shelby.restaurant.shelbysrestaurant.service.email.EmailSender;
+import com.shelby.restaurant.shelbysrestaurant.service.EmailService;
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
 import com.shelby.restaurant.shelbysrestaurant.model.user.UserRole;
 import com.shelby.restaurant.shelbysrestaurant.controller.resource.RegistrationRequest;
@@ -9,19 +9,21 @@ import com.shelby.restaurant.shelbysrestaurant.service.RegistrationService;
 import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
 import com.shelby.restaurant.shelbysrestaurant.service.ConfirmationTokenService;
 import com.shelby.restaurant.shelbysrestaurant.service.validation.EmailValidator;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RegistrationServiceImpl implements RegistrationService {
     private final UserService userService;
     private final EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
-    private final EmailSender emailSender;
+    private final EmailService emailService;
 
     @Override
     public String register(RegistrationRequest request) {
@@ -33,7 +35,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         String token = userService.signUpUser(new User(request.getEmail(), request.getPhoneNumber(), request.getPassword(), request.getFirstName(), request.getLastName(), UserRole.USER));
 
         final String link = "http://localhost:8080/shelbys-restaurant/registration/confirm?token=" + token;
-        emailSender.send(request.getEmail(), buildEmail(request.getFirstName(), link));
+        emailService.send(request.getEmail(), buildEmail(request.getFirstName(), link));
 
         return token;
     }

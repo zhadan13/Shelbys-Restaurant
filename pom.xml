@@ -17,6 +17,7 @@
 
     <properties>
         <java.version>17</java.version>
+        <swagger.version>1.6.3</swagger.version>
 
         <!-- Sonar Cloud project -->
         <sonar.organization>shelbys-restaurant</sonar.organization>
@@ -54,6 +55,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Swagger API docs -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
 
         <!-- Third party dependencies -->
@@ -96,22 +104,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <!--<plugin>
-                <groupId>com.heroku.sdk</groupId>
-                <artifactId>heroku-maven-plugin</artifactId>
-                <version>2.0.3</version>
-                <configuration>
-                    <appName>callicoder-heroku-maven-demo</appName>
-                    <includeTarget>false</includeTarget>
-                    <includes>
-                        <include>${project.build.directory}/${project.build.finalName}.jar</include>
-                    </includes>
-                    <jdkVersion>${java.version}</jdkVersion>
-                    <processTypes>
-                        <web>java $JAVA_OPTS -jar ${project.build.directory}/${project.build.finalName}.jar</web>
-                    </processTypes>
-                </configuration>
-            </plugin>-->
         </plugins>
     </build>
 </project>

@@ -1,8 +1,8 @@
-package com.shelby.restaurant.shelbysrestaurant.registration.token.service.impl;
+package com.shelby.restaurant.shelbysrestaurant.service.impl;
 
-import com.shelby.restaurant.shelbysrestaurant.registration.token.model.ConfirmationToken;
-import com.shelby.restaurant.shelbysrestaurant.registration.token.repository.ConfirmationTokenRepository;
-import com.shelby.restaurant.shelbysrestaurant.registration.token.service.ConfirmationTokenService;
+import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
+import com.shelby.restaurant.shelbysrestaurant.repository.token.ConfirmationTokenRepository;
+import com.shelby.restaurant.shelbysrestaurant.service.ConfirmationTokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

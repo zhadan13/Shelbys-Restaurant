@@ -1,13 +1,14 @@
-package com.shelby.restaurant.shelbysrestaurant.registration.service.impl;
+package com.shelby.restaurant.shelbysrestaurant.service.impl;
 
 import com.shelby.restaurant.shelbysrestaurant.auth.UserService;
-import com.shelby.restaurant.shelbysrestaurant.email.EmailSender;
-import com.shelby.restaurant.shelbysrestaurant.model.User;
-import com.shelby.restaurant.shelbysrestaurant.model.UserRole;
-import com.shelby.restaurant.shelbysrestaurant.registration.resource.RegistrationRequest;
-import com.shelby.restaurant.shelbysrestaurant.registration.service.RegistrationService;
-import com.shelby.restaurant.shelbysrestaurant.registration.token.model.ConfirmationToken;
-import com.shelby.restaurant.shelbysrestaurant.registration.token.service.ConfirmationTokenService;
+import com.shelby.restaurant.shelbysrestaurant.service.email.EmailSender;
+import com.shelby.restaurant.shelbysrestaurant.model.user.User;
+import com.shelby.restaurant.shelbysrestaurant.model.user.UserRole;
+import com.shelby.restaurant.shelbysrestaurant.controller.resource.RegistrationRequest;
+import com.shelby.restaurant.shelbysrestaurant.service.RegistrationService;
+import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
+import com.shelby.restaurant.shelbysrestaurant.service.ConfirmationTokenService;
+import com.shelby.restaurant.shelbysrestaurant.service.email.EmailValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class RegistrationServiceImpl implements RegistrationService {
     private final UserService userService;
-    private final EmailSender.EmailValidator emailValidator;
+    private final EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
 

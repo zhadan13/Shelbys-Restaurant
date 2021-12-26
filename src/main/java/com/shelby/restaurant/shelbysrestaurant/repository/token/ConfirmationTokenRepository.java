@@ -1,6 +1,6 @@
-package com.shelby.restaurant.shelbysrestaurant.registration.token.repository;
+package com.shelby.restaurant.shelbysrestaurant.repository.token;
 
-import com.shelby.restaurant.shelbysrestaurant.registration.token.model.ConfirmationToken;
+import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

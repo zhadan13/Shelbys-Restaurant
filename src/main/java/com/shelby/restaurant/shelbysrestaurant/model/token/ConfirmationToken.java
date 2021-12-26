@@ -1,6 +1,6 @@
-package com.shelby.restaurant.shelbysrestaurant.registration.token.model;
+package com.shelby.restaurant.shelbysrestaurant.model.token;
 
-import com.shelby.restaurant.shelbysrestaurant.model.User;
+import com.shelby.restaurant.shelbysrestaurant.model.user.User;
 import lombok.*;
 
 import javax.persistence.Column;

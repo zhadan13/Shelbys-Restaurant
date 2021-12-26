@@ -1,4 +1,4 @@
-package com.shelby.restaurant.shelbysrestaurant.model;
+package com.shelby.restaurant.shelbysrestaurant.model.user;
 
 import lombok.*;
 import org.hibernate.Hibernate;

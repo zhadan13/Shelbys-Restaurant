@@ -1,5 +1,6 @@
 package com.shelby.restaurant.shelbysrestaurant.configuration;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
@@ -11,6 +12,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
+@ConditionalOnProperty(name = "thymeleaf.enabled", havingValue = "true")
 public class ApplicationConfig extends WebMvcConfigurationSupport {
 
     @Override

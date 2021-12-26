@@ -1,6 +1,6 @@
-package com.shelby.restaurant.shelbysrestaurant.repository;
+package com.shelby.restaurant.shelbysrestaurant.repository.user;
 
-import com.shelby.restaurant.shelbysrestaurant.model.User;
+import com.shelby.restaurant.shelbysrestaurant.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

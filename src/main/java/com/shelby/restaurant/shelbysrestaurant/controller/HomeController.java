@@ -11,6 +11,6 @@ public class HomeController {
 
     @GetMapping
     public ResponseEntity<?> home() {
-        return ResponseEntity.ok("Home");
+        return ResponseEntity.ok("Shelby's restaurant home page");
     }
 }

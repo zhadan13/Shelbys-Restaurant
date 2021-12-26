@@ -1,10 +1,11 @@
 package com.shelby.restaurant.shelbysrestaurant.auth;
 
-import com.shelby.restaurant.shelbysrestaurant.model.User;
-import com.shelby.restaurant.shelbysrestaurant.registration.token.model.ConfirmationToken;
-import com.shelby.restaurant.shelbysrestaurant.registration.token.service.ConfirmationTokenService;
-import com.shelby.restaurant.shelbysrestaurant.repository.UserRepository;
+import com.shelby.restaurant.shelbysrestaurant.model.user.User;
+import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
+import com.shelby.restaurant.shelbysrestaurant.service.ConfirmationTokenService;
+import com.shelby.restaurant.shelbysrestaurant.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +18,10 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
-    private final static String USER_NOT_FOUND_MSG = "AppUser with email %s not found!";
+    private static final String USER_NOT_FOUND_MSG = "AppUser with email %s not found!";
+
+    @Value("${confirmation.token.expiration.time}")
+    private Integer time;
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -40,7 +44,7 @@ public class UserService implements UserDetailsService {
         ConfirmationToken confirmationToken = ConfirmationToken.builder()
                 .token(token)
                 .createdAt(LocalDateTime.now())
-                .expiresAt(LocalDateTime.now().plusMinutes(30))
+                .expiresAt(LocalDateTime.now().plusMinutes(time))
                 .user(user)
                 .build();
 

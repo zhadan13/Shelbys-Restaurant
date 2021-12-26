@@ -1,4 +1,4 @@
-package com.shelby.restaurant.shelbysrestaurant.email;
+package com.shelby.restaurant.shelbysrestaurant.service.email;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

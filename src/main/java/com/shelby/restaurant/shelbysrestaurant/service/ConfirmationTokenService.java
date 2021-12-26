@@ -1,6 +1,6 @@
-package com.shelby.restaurant.shelbysrestaurant.registration.token.service;
+package com.shelby.restaurant.shelbysrestaurant.service;
 
-import com.shelby.restaurant.shelbysrestaurant.registration.token.model.ConfirmationToken;
+import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
 
 import java.util.Optional;
 

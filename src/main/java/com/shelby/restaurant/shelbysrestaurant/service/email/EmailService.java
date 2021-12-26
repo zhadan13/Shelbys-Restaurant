@@ -1,4 +1,4 @@
-package com.shelby.restaurant.shelbysrestaurant.email;
+package com.shelby.restaurant.shelbysrestaurant.service.email;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

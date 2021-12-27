@@ -1,5 +1,6 @@
 package com.shelby.restaurant.shelbysrestaurant.mapper;
 
+import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserCreateRequest;
 import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserUpdateRequest;
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
 import org.mapstruct.Mapper;
@@ -18,4 +19,12 @@ public interface UserMapper {
     @Mapping(target = "phoneNumber", expression = "java(request.getPhoneNumber())")
     @Mapping(target = "address", expression = "java(request.getAddress())")
     void mapUserUpdateRequestToUser(UserUpdateRequest request, @MappingTarget User user);
+
+    @Mapping(target = "email", expression = "java(request.getEmail())")
+    @Mapping(target = "phoneNumber", expression = "java(request.getPhoneNumber())")
+    @Mapping(target = "password", expression = "java(request.getPassword())")
+    @Mapping(target = "firstName", expression = "java(request.getFirstName())")
+    @Mapping(target = "lastName", expression = "java(request.getLastName())")
+    @Mapping(target = "address", expression = "java(request.getAddress())")
+    void mapUserCreateRequestToUser(UserCreateRequest request, @MappingTarget User user);
 }

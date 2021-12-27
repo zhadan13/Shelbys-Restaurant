@@ -1,5 +1,6 @@
 package com.shelby.restaurant.shelbysrestaurant.exception.handler;
 
+import com.shelby.restaurant.shelbysrestaurant.exception.UserAlreadyExists;
 import com.shelby.restaurant.shelbysrestaurant.exception.UserNotFoundException;
 import com.shelby.restaurant.shelbysrestaurant.exception.ValidationException;
 import org.springframework.http.HttpHeaders;
@@ -14,7 +15,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {UserNotFoundException.class, ValidationException.class})
-    protected ResponseEntity<?> handleException(RuntimeException e, WebRequest request) {
+    protected ResponseEntity<?> handleBadRequestException(RuntimeException e, WebRequest request) {
         return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value = {UserAlreadyExists.class})
+    protected ResponseEntity<?> handleConflictException(RuntimeException e, WebRequest request) {
+        return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 }

@@ -6,41 +6,217 @@
 	},
 	"item": [
 		{
-			"name": "health",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{HOST}}/{{PATH}}/actuator/health",
-					"host": [
-						"{{HOST}}"
-					],
-					"path": [
-						"{{PATH}}",
-						"actuator",
-						"health"
-					]
+			"name": "Actuator/swagger",
+			"item": [
+				{
+					"name": "health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/actuator/health",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actuator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/actuator",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"actuator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "swagger",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/v3/api-docs",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"v3",
+								"api-docs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "swagger ui",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/swagger-ui.html",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"swagger-ui.html"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "actuator",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{HOST}}/{{PATH}}/actuator",
-					"host": [
-						"{{HOST}}"
-					],
-					"path": [
-						"{{PATH}}",
-						"actuator"
-					]
+			"name": "User",
+			"item": [
+				{
+					"name": "getUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/users/12345",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"users",
+								"12345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/users",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserByEmail",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVICE-PATH}}/users/email",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"users",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Artem\",\r\n    \"lastName\": \"Zhadan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVICE-PATH}}/users/12345",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"users",
+								"12345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/users/12345",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"users",
+								"12345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user2@mail.com\",\r\n    \"phoneNumber\": \"0123456787\",\r\n    \"password\": \"123456Aa\",\r\n    \"firstName\": \"Artem\",\r\n    \"lastName\": \"Zhadan\",\r\n    \"address\": {\r\n        \"city\": \"city\",\r\n        \"street\": \"street\",\r\n        \"house\": \"house\",\r\n        \"apartment\": \"apartment\",\r\n        \"floor\": \"floor\",\r\n        \"entrance\": \"entrance\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVICE-PATH}}/users",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
 			"name": "home",
@@ -48,50 +224,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}/{{PATH}}/home",
+					"raw": "{{SERVICE-PATH}}/home",
 					"host": [
-						"{{HOST}}"
+						"{{SERVICE-PATH}}"
 					],
 					"path": [
-						"{{PATH}}",
 						"home"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "swagger",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{HOST}}/{{PATH}}/v3/api-docs",
-					"host": [
-						"{{HOST}}"
-					],
-					"path": [
-						"{{PATH}}",
-						"v3",
-						"api-docs"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "swagger ui",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{HOST}}/{{PATH}}/swagger-ui.html",
-					"host": [
-						"{{HOST}}"
-					],
-					"path": [
-						"{{PATH}}",
-						"swagger-ui.html"
 					]
 				}
 			},

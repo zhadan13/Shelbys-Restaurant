@@ -1,7 +1,11 @@
 package com.shelby.restaurant.shelbysrestaurant.model.user;
 
 import com.shelby.restaurant.shelbysrestaurant.model.address.Address;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,11 +18,13 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
 
 @Entity
+@Table(name = "users")
 @Getter
 @Setter
 @ToString

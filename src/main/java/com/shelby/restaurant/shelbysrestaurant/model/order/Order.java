@@ -18,11 +18,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.time.LocalDateTime;
 import java.util.Map;
 
 @Entity
+@Table(name = "orders")
 @Getter
 @Setter
 @ToString
@@ -35,7 +37,7 @@ public class Order {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(nullable = false, referencedColumnName = "id")
+    @JoinColumn(nullable = false, name = "user_id", referencedColumnName = "id")
     private User user;
 
     @Enumerated(EnumType.STRING)

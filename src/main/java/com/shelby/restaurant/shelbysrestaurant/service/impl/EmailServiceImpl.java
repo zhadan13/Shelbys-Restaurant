@@ -3,12 +3,13 @@ package com.shelby.restaurant.shelbysrestaurant.service.impl;
 import com.shelby.restaurant.shelbysrestaurant.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 @Slf4j
@@ -16,21 +17,20 @@ import javax.mail.internet.MimeMessage;
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
-    private final JavaMailSender mailSender;
+    private final MimeMessage mimeMessage;
 
     @Async
     @Override
-    public void send(String to, String email) {
+    public void send(String subject, String to, String email) {
+        log.info("Sending email");
         try {
-            MimeMessage mimeMessage = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-            helper.setText(email, true);
-            helper.setTo(to);
-            helper.setSubject("Confirm your email");
-            helper.setFrom("service@service.com");
-            mailSender.send(mimeMessage);
+            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            mimeMessage.setSubject(subject);
+            mimeMessage.setContent(email, "text/html; charset=utf-8");
+            mimeMessage.saveChanges();
+            Transport.send(mimeMessage);
         } catch (MessagingException e) {
-            log.error("Failed to send email!", e);
+            log.error("Failed to send email", e);
             throw new IllegalStateException("Failed to send email!");
         }
     }

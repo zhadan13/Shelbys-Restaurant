@@ -219,6 +219,61 @@
 			]
 		},
 		{
+			"name": "Registration",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user2@mail.com\",\r\n    \"phoneNumber\": \"0123456787\",\r\n    \"password\": \"123456Aa\",\r\n    \"firstName\": \"Artem\",\r\n    \"lastName\": \"Zhadan\",\r\n    \"address\": {\r\n        \"city\": \"city\",\r\n        \"street\": \"street\",\r\n        \"house\": \"house\",\r\n        \"apartment\": \"apartment\",\r\n        \"floor\": \"floor\",\r\n        \"entrance\": \"entrance\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVICE-PATH}}/registration",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/registration/confirm?token=mock_token",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"registration",
+								"confirm"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "mock_token"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "home",
 			"request": {
 				"method": "GET",

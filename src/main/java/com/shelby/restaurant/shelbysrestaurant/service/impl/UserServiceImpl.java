@@ -13,6 +13,7 @@ import com.shelby.restaurant.shelbysrestaurant.service.UserService;
 import com.shelby.restaurant.shelbysrestaurant.service.validation.EmailValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final EmailValidator emailValidator;
     private final UserMapper userMapper;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public User createUser(UserCreateRequest createRequest) {
@@ -38,6 +40,8 @@ public class UserServiceImpl implements UserService {
             log.error("Can't create new user. User with requested email or phone already exists");
             throw new UserAlreadyExists("User with requested email or phone already exists!");
         }
+        final String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         return userRepository.save(user);
     }
 

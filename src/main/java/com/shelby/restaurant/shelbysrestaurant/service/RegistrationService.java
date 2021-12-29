@@ -1,9 +1,10 @@
 package com.shelby.restaurant.shelbysrestaurant.service;
 
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.RegistrationRequest;
+import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserCreateRequest;
 
 public interface RegistrationService {
-    String register(RegistrationRequest request);
+
+    String register(UserCreateRequest request);
 
     String confirmToken(String token);
 }

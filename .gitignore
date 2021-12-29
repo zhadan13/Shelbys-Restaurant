@@ -9,6 +9,7 @@ application.log
 
 ### Credentials ###
 /src/main/resources/hibernate.properties
+/src/main/resources/mail.properties
 
 ### STS ###
 .apt_generated

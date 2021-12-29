@@ -1,8 +1,9 @@
 package com.shelby.restaurant.shelbysrestaurant.controller;
 
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.RegistrationRequest;
+import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserCreateRequest;
 import com.shelby.restaurant.shelbysrestaurant.service.RegistrationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,20 +11,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
-@RequestMapping(path = "/registration")
+@RequestMapping("/registration")
 @RequiredArgsConstructor
 public class RegistrationController {
 
     private final RegistrationService registrationService;
 
     @PostMapping
-    public String register(@RequestBody RegistrationRequest request) {
-        return registrationService.register(request);
+    public ResponseEntity<String> register(@RequestBody @Valid UserCreateRequest request) {
+        return ResponseEntity.ok(registrationService.register(request));
     }
 
-    @GetMapping(path = "confirm")
-    public String confirm(@RequestParam("token") String token) {
-        return registrationService.confirmToken(token);
+    @GetMapping(path = "/confirm")
+    public ResponseEntity<String> confirm(@RequestParam("token") String token) {
+        return ResponseEntity.ok(registrationService.confirmToken(token));
     }
 }

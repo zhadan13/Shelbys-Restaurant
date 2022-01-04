@@ -41,7 +41,7 @@ public class EmailSenderConfig {
         properties.put(EmailFields.PORT, port);
         properties.put(EmailFields.AUTH, auth);
         properties.put(EmailFields.STARTTLS, starttls);
-        Session session = Session.getInstance(properties, new Authenticator() {
+        final Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(user, password);

@@ -13,6 +13,8 @@ import com.shelby.restaurant.shelbysrestaurant.service.UserService;
 import com.shelby.restaurant.shelbysrestaurant.service.validation.EmailValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -97,5 +99,10 @@ public class UserServiceImpl implements UserService {
             throw new ValidationException("Passed email not valid!");
         }
         userRepository.enableUser(email);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return getUserByEmail(email);
     }
 }

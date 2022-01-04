@@ -21,7 +21,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Async
     @Override
-    public void send(String subject, String to, String email) {
+    public void send(String to, String subject, String email) {
         log.info("Sending email");
         try {
             mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));

@@ -9,5 +9,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class LoginController {
 
-    // TODO: Implement login logic according to User service
 }

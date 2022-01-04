@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -75,22 +74,25 @@ public class User implements UserDetails {
         if (this == o) {
             return true;
         }
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         User user = (User) o;
-        return id != null && Objects.equals(id, user.id);
+        return Objects.equals(id, user.id) && Objects.equals(email, user.email)
+                && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(password, user.password)
+                && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName)
+                && role == user.role && Objects.equals(address, user.address)
+                && Objects.equals(locked, user.locked) && Objects.equals(enabled, user.enabled);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(id, email, phoneNumber, password, firstName, lastName, role, address, locked, enabled);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
-        return Collections.singletonList(authority);
+        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

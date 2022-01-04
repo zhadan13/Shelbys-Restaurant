@@ -3,10 +3,11 @@ package com.shelby.restaurant.shelbysrestaurant.service;
 import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserCreateRequest;
 import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserUpdateRequest;
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     User createUser(UserCreateRequest createRequest);
 

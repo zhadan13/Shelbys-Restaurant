@@ -24,6 +24,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class RegistrationServiceImpl implements RegistrationService {
 
+    private static final String CONFIRM_TOKEN_PATH = "/registration/confirm?token=";
+
     @Value("${application.path}")
     private String applicationPath;
 
@@ -47,8 +49,9 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .user(user)
                 .build();
         confirmationTokenService.saveConfirmationToken(confirmationToken);
-        final String link = applicationPath + "/registration/confirm?token=" + token;
-        emailService.send(user.getEmail(), "Confirm your email address", EmailTemplates.buildEmail(user.getFirstName(), link));
+        final String link = applicationPath + CONFIRM_TOKEN_PATH + token;
+        emailService.send(user.getEmail(), EmailTemplates.CONFIRM_EMAIL_SUBJECT,
+                EmailTemplates.buildEmail(user.getFirstName(), link));
         return token;
     }
 

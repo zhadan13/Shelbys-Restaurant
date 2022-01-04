@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .invalidSessionUrl("/home")
-                .sessionFixation().none()
+                .sessionFixation().migrateSession()
                 .maximumSessions(1)
                 .expiredUrl("/home");
     }

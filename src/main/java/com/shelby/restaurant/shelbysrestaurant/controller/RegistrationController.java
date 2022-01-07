@@ -25,7 +25,7 @@ public class RegistrationController {
         return ResponseEntity.ok(registrationService.register(request));
     }
 
-    @GetMapping(path = "/confirm")
+    @GetMapping("/confirm")
     public ResponseEntity<String> confirm(@RequestParam("token") String token) {
         return ResponseEntity.ok(registrationService.confirmToken(token));
     }

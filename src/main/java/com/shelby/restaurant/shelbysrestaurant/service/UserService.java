@@ -22,4 +22,6 @@ public interface UserService extends UserDetailsService {
     void deleteUser(Long userId);
 
     void enableUser(String email);
+
+    boolean comparePasswords(String password, String encryptedPassword);
 }

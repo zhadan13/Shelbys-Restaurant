@@ -197,7 +197,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"user2@mail.com\",\r\n    \"phoneNumber\": \"0123456787\",\r\n    \"password\": \"123456Aa\",\r\n    \"firstName\": \"Artem\",\r\n    \"lastName\": \"Zhadan\",\r\n    \"address\": {\r\n        \"city\": \"city\",\r\n        \"street\": \"street\",\r\n        \"house\": \"house\",\r\n        \"apartment\": \"apartment\",\r\n        \"floor\": \"floor\",\r\n        \"entrance\": \"entrance\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"email\": \"user@mail.com\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"password\": \"123456Aa\",\r\n    \"firstName\": \"Artem\",\r\n    \"lastName\": \"Zhadan\",\r\n    \"address\": {\r\n        \"city\": \"city\",\r\n        \"street\": \"street\",\r\n        \"house\": \"house\",\r\n        \"apartment\": \"apartment\",\r\n        \"floor\": \"floor\",\r\n        \"entrance\": \"entrance\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -228,7 +228,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"user2@mail.com\",\r\n    \"phoneNumber\": \"0123456787\",\r\n    \"password\": \"123456Aa\",\r\n    \"firstName\": \"Artem\",\r\n    \"lastName\": \"Zhadan\",\r\n    \"address\": {\r\n        \"city\": \"city\",\r\n        \"street\": \"street\",\r\n        \"house\": \"house\",\r\n        \"apartment\": \"apartment\",\r\n        \"floor\": \"floor\",\r\n        \"entrance\": \"entrance\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"email\": \"user@mail.com\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"password\": \"123456Aa\",\r\n    \"firstName\": \"Artem\",\r\n    \"lastName\": \"Zhadan\",\r\n    \"address\": {\r\n        \"city\": \"city\",\r\n        \"street\": \"street\",\r\n        \"house\": \"house\",\r\n        \"apartment\": \"apartment\",\r\n        \"floor\": \"floor\",\r\n        \"entrance\": \"entrance\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -266,6 +266,37 @@
 									"key": "token",
 									"value": "mock_token"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user@mail.com\",\r\n    \"password\": \"123456Aa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVICE-PATH}}/login",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"login"
 							]
 						}
 					},

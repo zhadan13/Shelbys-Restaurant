@@ -2,7 +2,7 @@ package com.shelby.restaurant.shelbysrestaurant.service.impl;
 
 import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserCreateRequest;
 import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserUpdateRequest;
-import com.shelby.restaurant.shelbysrestaurant.exception.UserAlreadyExists;
+import com.shelby.restaurant.shelbysrestaurant.exception.UserAlreadyExistsException;
 import com.shelby.restaurant.shelbysrestaurant.exception.UserNotFoundException;
 import com.shelby.restaurant.shelbysrestaurant.exception.ValidationException;
 import com.shelby.restaurant.shelbysrestaurant.mapper.UserMapper;
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
                 .findUserByEmailOrPhoneNumber(user.getEmail(), user.getPhoneNumber());
         if (optionalCurrentUser.isPresent()) {
             log.error("Can't create new user. User with requested email or phone already exists");
-            throw new UserAlreadyExists("User with requested email or phone already exists!");
+            throw new UserAlreadyExistsException("User with requested email or phone already exists!");
         }
         final String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
@@ -103,6 +103,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        log.info("Loading user by username");
         return getUserByEmail(email);
+    }
+
+    @Override
+    public boolean comparePasswords(String password, String encryptedPassword) {
+        return bCryptPasswordEncoder.matches(password, encryptedPassword);
     }
 }

@@ -4,16 +4,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.CONFLICT)
-public class UserAlreadyExists extends RuntimeException {
+public class UserAlreadyExistsException extends RuntimeException {
 
-    public UserAlreadyExists() {
+    public UserAlreadyExistsException() {
     }
 
-    public UserAlreadyExists(String message) {
+    public UserAlreadyExistsException(String message) {
         super(message);
     }
 
-    public UserAlreadyExists(String message, Exception e) {
+    public UserAlreadyExistsException(String message, Exception e) {
         super(message, e);
     }
 }

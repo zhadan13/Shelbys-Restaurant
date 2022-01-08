@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,7 +43,10 @@ public class LoginController {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         securityContext.setAuthentication(authentication);
         HttpSession session = servletRequest.getSession(true);
-        // HttpSession session = request.getSessionId(true);
+
+        log.debug("Session ID [{}]", RequestContextHolder.currentRequestAttributes().getSessionId());
+        log.debug("Session ID [{}]", session.getId());
+
         session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
 
         log.debug("Logging in with [{}]", authentication.getPrincipal());

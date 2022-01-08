@@ -3,6 +3,7 @@ package com.shelby.restaurant.shelbysrestaurant.service.impl;
 import com.shelby.restaurant.shelbysrestaurant.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 
 @Slf4j
 @Service
+@ConditionalOnProperty(name = "mail.sender.enabled", havingValue = "true")
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
 

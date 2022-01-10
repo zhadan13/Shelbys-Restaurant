@@ -30,7 +30,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private String applicationPath;
 
     @Value("${confirmation.token.expiration.time}")
-    private Integer time;
+    private Integer tokenExpirationTime;
 
     private final UserService userService;
     private final ConfirmationTokenService confirmationTokenService;
@@ -45,7 +45,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         ConfirmationToken confirmationToken = ConfirmationToken.builder()
                 .token(token)
                 .createdAt(LocalDateTime.now())
-                .expiresAt(LocalDateTime.now().plusMinutes(time))
+                .expiresAt(LocalDateTime.now().plusMinutes(tokenExpirationTime))
                 .user(user)
                 .build();
         confirmationTokenService.saveConfirmationToken(confirmationToken);

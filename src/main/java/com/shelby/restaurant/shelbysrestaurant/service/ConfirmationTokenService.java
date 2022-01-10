@@ -8,5 +8,9 @@ public interface ConfirmationTokenService {
 
     ConfirmationToken getToken(String token);
 
+    ConfirmationToken getTokenByUserId(Long userId);
+
+    ConfirmationToken refreshToken(ConfirmationToken token);
+
     void setConfirmedAt(String token);
 }

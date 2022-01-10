@@ -6,14 +6,19 @@ import com.shelby.restaurant.shelbysrestaurant.repository.token.ConfirmationToke
 import com.shelby.restaurant.shelbysrestaurant.service.ConfirmationTokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ConfirmationTokenServiceImpl implements ConfirmationTokenService {
+
+    @Value("${confirmation.token.expiration.time}")
+    private Integer tokenExpirationTime;
 
     private final ConfirmationTokenRepository confirmationTokenRepository;
 
@@ -28,6 +33,21 @@ public class ConfirmationTokenServiceImpl implements ConfirmationTokenService {
         log.info("Getting confirmation token");
         return confirmationTokenRepository.findByToken(token)
                 .orElseThrow(() -> new TokenNotFoundException("Token not found!"));
+    }
+
+    @Override
+    public ConfirmationToken getTokenByUserId(Long userId) {
+        log.info("Getting confirmation token by userId");
+        return confirmationTokenRepository.findByUser(userId)
+                .orElseThrow(() -> new TokenNotFoundException("Token not found!"));
+    }
+
+    @Override
+    public ConfirmationToken refreshToken(ConfirmationToken token) {
+        log.info("Refreshing confirmation token");
+        token.setToken(UUID.randomUUID().toString());
+        token.setExpiresAt(LocalDateTime.now().plusMinutes(tokenExpirationTime));
+        return confirmationTokenRepository.save(token);
     }
 
     @Override

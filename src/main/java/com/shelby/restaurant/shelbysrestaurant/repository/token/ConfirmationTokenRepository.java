@@ -16,7 +16,7 @@ public interface ConfirmationTokenRepository extends JpaRepository<ConfirmationT
 
     Optional<ConfirmationToken> findByToken(String token);
 
-    @Query("SELECT ConfirmationToken AS t FROM ConfirmationToken WHERE t.user = ?1")
+    @Query("SELECT t FROM ConfirmationToken t WHERE t.user = ?1")
     Optional<ConfirmationToken> findByUser(Long userId);
 
     @Transactional

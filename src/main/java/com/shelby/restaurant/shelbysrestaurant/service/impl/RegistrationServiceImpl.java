@@ -51,7 +51,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         confirmationTokenService.saveConfirmationToken(confirmationToken);
         final String link = applicationPath + CONFIRM_TOKEN_PATH + token;
         emailService.send(user.getEmail(), EmailTemplates.CONFIRM_EMAIL_SUBJECT,
-                EmailTemplates.buildEmail(user.getFirstName(), link));
+                EmailTemplates.buildConfirmEmail(user.getFirstName(), link));
         return token;
     }
 

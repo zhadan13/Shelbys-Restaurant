@@ -47,7 +47,7 @@ public class LoginServiceImpl implements LoginService {
                 ConfirmationToken newToken = confirmationTokenService.refreshToken(token);
                 final String link = applicationPath + CONFIRM_TOKEN_PATH + newToken;
                 emailService.send(user.getEmail(), EmailTemplates.CONFIRM_EMAIL_SUBJECT,
-                        EmailTemplates.buildEmail(user.getFirstName(), link));
+                        EmailTemplates.buildConfirmEmail(user.getFirstName(), link));
             }
             throw new UserAccountNotEnabledException("User account not enabled!");
         }

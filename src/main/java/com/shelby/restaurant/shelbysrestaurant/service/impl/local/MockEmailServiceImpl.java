@@ -1,4 +1,4 @@
-package com.shelby.restaurant.shelbysrestaurant.service.impl;
+package com.shelby.restaurant.shelbysrestaurant.service.impl.local;
 
 import com.shelby.restaurant.shelbysrestaurant.service.EmailService;
 import lombok.extern.slf4j.Slf4j;

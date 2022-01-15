@@ -1,1 +1,1 @@
-# Shelby's Restaurant service
+# Shelby's Restaurant backend service

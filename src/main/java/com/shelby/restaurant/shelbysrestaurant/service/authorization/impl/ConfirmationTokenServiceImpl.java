@@ -1,9 +1,9 @@
-package com.shelby.restaurant.shelbysrestaurant.service.impl;
+package com.shelby.restaurant.shelbysrestaurant.service.authorization.impl;
 
 import com.shelby.restaurant.shelbysrestaurant.exception.TokenNotFoundException;
 import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
 import com.shelby.restaurant.shelbysrestaurant.repository.token.ConfirmationTokenRepository;
-import com.shelby.restaurant.shelbysrestaurant.service.ConfirmationTokenService;
+import com.shelby.restaurant.shelbysrestaurant.service.authorization.ConfirmationTokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

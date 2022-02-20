@@ -1,6 +1,7 @@
 package com.shelby.restaurant.shelbysrestaurant.model.product;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import javax.persistence.Id;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Product {
 
     @Id

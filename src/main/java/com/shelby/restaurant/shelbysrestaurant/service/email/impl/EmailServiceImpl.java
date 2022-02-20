@@ -1,6 +1,6 @@
-package com.shelby.restaurant.shelbysrestaurant.service.impl;
+package com.shelby.restaurant.shelbysrestaurant.service.email.impl;
 
-import com.shelby.restaurant.shelbysrestaurant.service.EmailService;
+import com.shelby.restaurant.shelbysrestaurant.service.email.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

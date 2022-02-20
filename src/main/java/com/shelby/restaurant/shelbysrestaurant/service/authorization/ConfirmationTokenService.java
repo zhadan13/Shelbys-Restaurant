@@ -1,4 +1,4 @@
-package com.shelby.restaurant.shelbysrestaurant.service;
+package com.shelby.restaurant.shelbysrestaurant.service.authorization;
 
 import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
 

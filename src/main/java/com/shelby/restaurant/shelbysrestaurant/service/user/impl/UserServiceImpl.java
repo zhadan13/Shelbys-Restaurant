@@ -1,15 +1,14 @@
-package com.shelby.restaurant.shelbysrestaurant.service.impl;
+package com.shelby.restaurant.shelbysrestaurant.service.user.impl;
 
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserCreateRequest;
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserUpdateRequest;
+import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserCreateRequest;
+import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserUpdateRequest;
 import com.shelby.restaurant.shelbysrestaurant.exception.UserAlreadyExistsException;
 import com.shelby.restaurant.shelbysrestaurant.exception.UserNotFoundException;
 import com.shelby.restaurant.shelbysrestaurant.exception.ValidationException;
-import com.shelby.restaurant.shelbysrestaurant.mapper.UserMapper;
+import com.shelby.restaurant.shelbysrestaurant.mapper.user.UserMapper;
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
-import com.shelby.restaurant.shelbysrestaurant.model.user.UserRole;
 import com.shelby.restaurant.shelbysrestaurant.repository.user.UserRepository;
-import com.shelby.restaurant.shelbysrestaurant.service.UserService;
+import com.shelby.restaurant.shelbysrestaurant.service.user.UserService;
 import com.shelby.restaurant.shelbysrestaurant.service.validation.EmailValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(UserCreateRequest createRequest) {
         log.info("Creating new user");
-        User user = User.builder().role(UserRole.USER).enabled(false).locked(false).build();
+        User user = User.builder().enabled(false).locked(false).build();
         userMapper.mapUserCreateRequestToUser(createRequest, user);
         Optional<User> optionalCurrentUser = userRepository
                 .findUserByEmailOrPhoneNumber(user.getEmail(), user.getPhoneNumber());
@@ -49,16 +48,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(Long userId, UserUpdateRequest userUpdateRequest) {
-        log.info("Updating user with id " + userId);
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User with id " + userId + " not found!"));
-        userMapper.mapUserUpdateRequestToUser(userUpdateRequest, user);
-        userRepository.save(user);
+        log.info("Updating user with id {}", userId);
+        userRepository.findById(userId)
+                .ifPresentOrElse(user -> {
+                    userMapper.mapUserUpdateRequestToUser(userUpdateRequest, user);
+                    userRepository.save(user);
+                }, () -> {
+                    log.error("User with id {} not found", userId);
+                    throw new UserNotFoundException("User with id " + userId + " not found!");
+                });
     }
 
     @Override
     public User getUserById(Long userId) {
-        log.info("Retrieving user by id " + userId);
+        log.info("Retrieving user by id {}", userId);
         return userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User with id " + userId + " not found!"));
     }
@@ -82,13 +85,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long userId) {
-        log.info("Deleting user by id " + userId);
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isEmpty()) {
-            log.error("User with id " + userId + " not found");
-            throw new UserNotFoundException("User with id " + userId + " not found!");
-        }
-        userRepository.deleteById(userId);
+        log.info("Deleting user by id {}", userId);
+        userRepository.findById(userId)
+                .ifPresentOrElse(userRepository::delete, () -> {
+                    log.error("User with id " + userId + " not found");
+                    throw new UserNotFoundException("User with id " + userId + " not found!");
+                });
     }
 
     @Override

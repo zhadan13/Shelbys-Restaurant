@@ -1,6 +1,7 @@
 package com.shelby.restaurant.shelbysrestaurant.exception.handler;
 
 import com.shelby.restaurant.shelbysrestaurant.exception.InvalidCredentialsException;
+import com.shelby.restaurant.shelbysrestaurant.exception.ProductNotFoundException;
 import com.shelby.restaurant.shelbysrestaurant.exception.TokenExpiredException;
 import com.shelby.restaurant.shelbysrestaurant.exception.TokenNotFoundException;
 import com.shelby.restaurant.shelbysrestaurant.exception.UserAccountAlreadyConfirmedException;
@@ -19,10 +20,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {UserNotFoundException.class, ValidationException.class, TokenExpiredException.class,
-            TokenNotFoundException.class, InvalidCredentialsException.class})
+    @ExceptionHandler(value = {ValidationException.class, TokenExpiredException.class,
+            InvalidCredentialsException.class})
     protected ResponseEntity<?> handleBadRequestException(RuntimeException e, WebRequest request) {
         return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value = {UserNotFoundException.class, TokenNotFoundException.class,
+            ProductNotFoundException.class})
+    protected ResponseEntity<?> handleNotFoundException(RuntimeException e, WebRequest request) {
+        return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
     @ExceptionHandler(value = {UserAlreadyExistsException.class, UserAccountAlreadyConfirmedException.class})

@@ -2,6 +2,7 @@ package com.shelby.restaurant.shelbysrestaurant.controller.user.resource;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.shelby.restaurant.shelbysrestaurant.model.address.Address;
+import com.shelby.restaurant.shelbysrestaurant.model.user.UserRole;
 import lombok.Builder;
 import lombok.Data;
 
@@ -37,6 +38,10 @@ public class UserCreateRequest {
     @JsonProperty(value = "lastName")
     @Size(min = 1)
     private String lastName;
+
+    @JsonProperty(value = "lastName")
+    @NotNull
+    private UserRole role;
 
     @JsonProperty(value = "address")
     private Address address;

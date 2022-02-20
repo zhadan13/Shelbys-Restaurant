@@ -1,4 +1,4 @@
-package com.shelby.restaurant.shelbysrestaurant.service;
+package com.shelby.restaurant.shelbysrestaurant.service.email;
 
 @FunctionalInterface
 public interface EmailService {

@@ -1,14 +1,14 @@
-package com.shelby.restaurant.shelbysrestaurant.service.impl;
+package com.shelby.restaurant.shelbysrestaurant.service.authorization.impl;
 
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserCreateRequest;
+import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserCreateRequest;
 import com.shelby.restaurant.shelbysrestaurant.exception.TokenExpiredException;
 import com.shelby.restaurant.shelbysrestaurant.exception.UserAccountAlreadyConfirmedException;
 import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
-import com.shelby.restaurant.shelbysrestaurant.service.ConfirmationTokenService;
-import com.shelby.restaurant.shelbysrestaurant.service.EmailService;
-import com.shelby.restaurant.shelbysrestaurant.service.RegistrationService;
-import com.shelby.restaurant.shelbysrestaurant.service.UserService;
+import com.shelby.restaurant.shelbysrestaurant.service.authorization.ConfirmationTokenService;
+import com.shelby.restaurant.shelbysrestaurant.service.email.EmailService;
+import com.shelby.restaurant.shelbysrestaurant.service.authorization.RegistrationService;
+import com.shelby.restaurant.shelbysrestaurant.service.user.UserService;
 import com.shelby.restaurant.shelbysrestaurant.util.EmailTemplates;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

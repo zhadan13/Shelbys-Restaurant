@@ -1,7 +1,7 @@
-package com.shelby.restaurant.shelbysrestaurant.service;
+package com.shelby.restaurant.shelbysrestaurant.service.user;
 
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserCreateRequest;
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserUpdateRequest;
+import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserCreateRequest;
+import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserUpdateRequest;
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 

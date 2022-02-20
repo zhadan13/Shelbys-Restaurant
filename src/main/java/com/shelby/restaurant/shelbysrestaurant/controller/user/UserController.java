@@ -1,10 +1,10 @@
-package com.shelby.restaurant.shelbysrestaurant.controller;
+package com.shelby.restaurant.shelbysrestaurant.controller.user;
 
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.GetUserRequest;
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserCreateRequest;
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserUpdateRequest;
+import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.GetUserRequest;
+import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserCreateRequest;
+import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserUpdateRequest;
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
-import com.shelby.restaurant.shelbysrestaurant.service.UserService;
+import com.shelby.restaurant.shelbysrestaurant.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

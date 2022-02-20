@@ -1,7 +1,7 @@
-package com.shelby.restaurant.shelbysrestaurant.controller;
+package com.shelby.restaurant.shelbysrestaurant.controller.authorization;
 
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.LoginRequest;
-import com.shelby.restaurant.shelbysrestaurant.service.LoginService;
+import com.shelby.restaurant.shelbysrestaurant.controller.authorization.resource.LoginRequest;
+import com.shelby.restaurant.shelbysrestaurant.service.authorization.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

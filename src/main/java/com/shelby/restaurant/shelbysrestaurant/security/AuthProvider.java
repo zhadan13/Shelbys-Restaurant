@@ -1,6 +1,6 @@
 package com.shelby.restaurant.shelbysrestaurant.security;
 
-import com.shelby.restaurant.shelbysrestaurant.service.UserService;
+import com.shelby.restaurant.shelbysrestaurant.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

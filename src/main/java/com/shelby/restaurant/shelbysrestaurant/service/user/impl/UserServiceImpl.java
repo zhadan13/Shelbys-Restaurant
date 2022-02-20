@@ -1,7 +1,7 @@
-package com.shelby.restaurant.shelbysrestaurant.service.impl;
+package com.shelby.restaurant.shelbysrestaurant.service.user.impl;
 
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserCreateRequest;
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserUpdateRequest;
+import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserCreateRequest;
+import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserUpdateRequest;
 import com.shelby.restaurant.shelbysrestaurant.exception.UserAlreadyExistsException;
 import com.shelby.restaurant.shelbysrestaurant.exception.UserNotFoundException;
 import com.shelby.restaurant.shelbysrestaurant.exception.ValidationException;
@@ -9,7 +9,7 @@ import com.shelby.restaurant.shelbysrestaurant.mapper.UserMapper;
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
 import com.shelby.restaurant.shelbysrestaurant.model.user.UserRole;
 import com.shelby.restaurant.shelbysrestaurant.repository.user.UserRepository;
-import com.shelby.restaurant.shelbysrestaurant.service.UserService;
+import com.shelby.restaurant.shelbysrestaurant.service.user.UserService;
 import com.shelby.restaurant.shelbysrestaurant.service.validation.EmailValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

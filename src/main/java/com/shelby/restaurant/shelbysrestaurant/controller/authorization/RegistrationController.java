@@ -1,7 +1,7 @@
-package com.shelby.restaurant.shelbysrestaurant.controller;
+package com.shelby.restaurant.shelbysrestaurant.controller.authorization;
 
-import com.shelby.restaurant.shelbysrestaurant.controller.resource.UserCreateRequest;
-import com.shelby.restaurant.shelbysrestaurant.service.RegistrationService;
+import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserCreateRequest;
+import com.shelby.restaurant.shelbysrestaurant.service.authorization.RegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

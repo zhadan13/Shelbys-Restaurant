@@ -1,4 +1,4 @@
-package com.shelby.restaurant.shelbysrestaurant.controller.resource;
+package com.shelby.restaurant.shelbysrestaurant.controller.authorization.resource;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

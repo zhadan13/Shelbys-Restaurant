@@ -8,7 +8,7 @@ target/
 application.log
 
 ### Credentials ###
-/src/main/resources/hibernate.properties
+/src/main/resources/mongo.properties
 /src/main/resources/mail.properties
 
 ### STS ###

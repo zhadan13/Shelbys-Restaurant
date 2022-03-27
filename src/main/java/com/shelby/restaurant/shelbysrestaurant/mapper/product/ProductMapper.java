@@ -9,9 +9,11 @@ import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
+import java.time.LocalDateTime;
+
 @Component
 @Validated
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", imports = {LocalDateTime.class})
 public interface ProductMapper {
 
     @Mapping(target = "name", expression = "java(request.getName())")
@@ -20,6 +22,9 @@ public interface ProductMapper {
     @Mapping(target = "category", expression = "java(request.getCategory())")
     @Mapping(target = "price", expression = "java(request.getPrice())")
     @Mapping(target = "weight", expression = "java(request.getWeight())")
+    @Mapping(target = "popularity", constant = "0")
+    @Mapping(target = "isNew", constant = "true")
+    @Mapping(target = "addedAt", expression = "java(LocalDateTime.now())")
     void mapProductCreateRequestToProduct(ProductCreateRequest request, @MappingTarget Product product);
 
     @Mapping(target = "name", expression = "java(request.getName())")

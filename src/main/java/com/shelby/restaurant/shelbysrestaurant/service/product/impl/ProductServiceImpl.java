@@ -62,10 +62,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Async
     @Override
-    public void updateProductIsNewStatus(String productId, Boolean isNewStatus) {
+    public void updateProductIsNewStatus(String productId, Boolean status) {
         log.info("Updating isNew status for product with id {}", productId);
         productRepository.findById(productId)
-                .ifPresentOrElse(product -> productRepository.updateIsNewStatus(productId, isNewStatus), () -> {
+                .ifPresentOrElse(product -> productRepository.updateIsNewStatus(productId, status), () -> {
                     log.error("Product with id {} not found", productId);
                     throw new ProductNotFoundException("Product with id " + productId + " not found!");
                 });

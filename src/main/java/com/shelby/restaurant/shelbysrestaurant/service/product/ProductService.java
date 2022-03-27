@@ -14,7 +14,7 @@ public interface ProductService {
 
     void updateProductPopularity(String productId);
 
-    void updateProductIsNewStatus(String productId, Boolean isNewStatus);
+    void updateProductIsNewStatus(String productId, Boolean status);
 
     Product getProductById(String productId);
 

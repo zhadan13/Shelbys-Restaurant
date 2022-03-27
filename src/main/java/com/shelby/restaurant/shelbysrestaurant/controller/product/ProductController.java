@@ -49,13 +49,12 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
-        return ResponseEntity.ok(productService.getAllProducts());
-    }
-
-    @GetMapping("/category")
-    public ResponseEntity<List<Product>> getProductsByCategory(@RequestParam(name = "category") String category) {
-        return ResponseEntity.ok(productService.getProductsByCategory(category));
+    public ResponseEntity<List<Product>> getProducts(@RequestParam(name = "category", required = false) String category) {
+        if (category != null) {
+            return ResponseEntity.ok(productService.getProductsByCategory(category));
+        } else {
+            return ResponseEntity.ok(productService.getAllProducts());
+        }
     }
 
     @PutMapping("/{id}")
@@ -72,8 +71,8 @@ public class ProductController {
     }
 
     @PatchMapping("/{id}/status")
-    public ResponseEntity<?> updateProductIsNewStatus(@PathVariable String id, @RequestParam String isNewStatus) {
-        productService.updateProductIsNewStatus(id, Boolean.valueOf(isNewStatus));
+    public ResponseEntity<?> updateProductIsNewStatus(@PathVariable String id, @RequestParam String status) {
+        productService.updateProductIsNewStatus(id, Boolean.valueOf(status));
         return ResponseEntity.ok().build();
     }
 

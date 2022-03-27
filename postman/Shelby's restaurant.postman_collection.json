@@ -325,6 +325,168 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "createProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pepperoni\",\r\n    \"details\": \"Pepperoni the best\",\r\n    \"ingredients\": [\"Pepperoni\", \"Cheese\"],\r\n    \"category\": \"PIZZA\",\r\n    \"price\": \"8\",\r\n    \"weight\": \"800\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVICE-PATH}}/products",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pepperoni\",\r\n    \"details\": \"Pepperoni the best\",\r\n    \"ingredients\": [\"Pepperoni\", \"Cheese\"],\r\n    \"category\": \"PIZZA\",\r\n    \"price\": \"8\",\r\n    \"weight\": \"800\",\r\n    \"popularity\": \"100\",\r\n    \"isNew\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVICE-PATH}}/products/{{product_id}}",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"products",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/products/{{product_id}}",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"products",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/products",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "{{product_category}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/products/{{product_id}}",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"products",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProductIsNewStatus",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/products/{{product_id}}/status?status=true",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"products",
+								"{{product_id}}",
+								"status"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProductPopularity Copy",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/products/{{product_id}}/popularity",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"products",
+								"{{product_id}}",
+								"popularity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

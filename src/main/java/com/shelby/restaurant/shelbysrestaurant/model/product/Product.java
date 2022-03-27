@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Set;
+
 @Document("products")
 @Data
 @Builder
@@ -20,6 +22,8 @@ public class Product {
     private String name;
 
     private String details;
+
+    private Set<String> ingredients;
 
     private Category category;
 

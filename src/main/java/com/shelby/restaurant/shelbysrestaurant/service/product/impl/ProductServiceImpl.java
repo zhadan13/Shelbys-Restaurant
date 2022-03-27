@@ -88,7 +88,7 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductsByCategory(String category) {
         log.info("Retrieving all products by category {}", category);
         if (Arrays.stream(Category.values()).anyMatch(category1 -> category1.name().equalsIgnoreCase(category))) {
-            return productRepository.findAllByCategory(Category.valueOf(category));
+            return productRepository.findAllByCategory(Category.valueOf(category.toUpperCase()));
         }
         return Collections.emptyList();
     }

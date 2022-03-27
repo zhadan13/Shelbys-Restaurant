@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Data
 @Builder
@@ -17,6 +18,9 @@ public class ProductCreateRequest {
 
     @JsonProperty(value = "details", required = true)
     private String details;
+
+    @JsonProperty(value = "ingredients", required = true)
+    private Set<String> ingredients;
 
     @JsonProperty(value = "category", required = true)
     @NotNull

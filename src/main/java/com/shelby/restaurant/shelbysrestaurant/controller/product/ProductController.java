@@ -45,7 +45,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable String id) {
-        return ResponseEntity.ok(productService.getProductById(Long.valueOf(id)));
+        return ResponseEntity.ok(productService.getProductById(id));
     }
 
     @GetMapping
@@ -61,25 +61,25 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProduct(@PathVariable String id,
                                            @RequestBody @Valid ProductUpdateRequest updateRequest) {
-        productService.updateProduct(Long.valueOf(id), updateRequest);
+        productService.updateProduct(id, updateRequest);
         return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{id}/popularity")
     public ResponseEntity<?> updateProductPopularity(@PathVariable String id) {
-        productService.updateProductPopularity(Long.valueOf(id));
+        productService.updateProductPopularity(id);
         return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{id}/status")
     public ResponseEntity<?> updateProductIsNewStatus(@PathVariable String id, @RequestParam String isNewStatus) {
-        productService.updateProductIsNewStatus(Long.valueOf(id), Boolean.valueOf(isNewStatus));
+        productService.updateProductIsNewStatus(id, Boolean.valueOf(isNewStatus));
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable String id) {
-        productService.deleteProduct(Long.valueOf(id));
+        productService.deleteProduct(id);
         return ResponseEntity.ok().build();
     }
 }

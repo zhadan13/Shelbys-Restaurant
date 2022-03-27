@@ -84,18 +84,18 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "getUser",
+					"name": "getUserById",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{SERVICE-PATH}}/users/12345",
+							"raw": "{{SERVICE-PATH}}/users/{{user_id}}",
 							"host": [
 								"{{SERVICE-PATH}}"
 							],
 							"path": [
 								"users",
-								"12345"
+								"{{user_id}}"
 							]
 						}
 					},
@@ -160,13 +160,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{SERVICE-PATH}}/users/12345",
+							"raw": "{{SERVICE-PATH}}/users/{{user_id}}",
 							"host": [
 								"{{SERVICE-PATH}}"
 							],
 							"path": [
 								"users",
-								"12345"
+								"{{user_id}}"
 							]
 						}
 					},
@@ -178,13 +178,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{SERVICE-PATH}}/users/12345",
+							"raw": "{{SERVICE-PATH}}/users/{{user_id}}",
 							"host": [
 								"{{SERVICE-PATH}}"
 							],
 							"path": [
 								"users",
-								"12345"
+								"{{user_id}}"
 							]
 						}
 					},
@@ -197,7 +197,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"user@mail.com\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"password\": \"123456Aa\",\r\n    \"firstName\": \"Artem\",\r\n    \"lastName\": \"Zhadan\",\r\n    \"address\": {\r\n        \"city\": \"city\",\r\n        \"street\": \"street\",\r\n        \"house\": \"house\",\r\n        \"apartment\": \"apartment\",\r\n        \"floor\": \"floor\",\r\n        \"entrance\": \"entrance\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"email\": \"user@mail.com\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"password\": \"123456Aa\",\r\n    \"firstName\": \"Artem\",\r\n    \"lastName\": \"Zhadan\",\r\n    \"role\": \"USER\",\r\n    \"address\": {\r\n        \"city\": \"city\",\r\n        \"street\": \"street\",\r\n        \"house\": \"house\",\r\n        \"apartment\": \"apartment\",\r\n        \"floor\": \"floor\",\r\n        \"entrance\": \"entrance\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -228,7 +228,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"user@mail.com\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"password\": \"123456Aa\",\r\n    \"firstName\": \"Artem\",\r\n    \"lastName\": \"Zhadan\",\r\n    \"address\": {\r\n        \"city\": \"city\",\r\n        \"street\": \"street\",\r\n        \"house\": \"house\",\r\n        \"apartment\": \"apartment\",\r\n        \"floor\": \"floor\",\r\n        \"entrance\": \"entrance\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"email\": \"user@mail.com\",\r\n    \"phoneNumber\": \"1234567890\",\r\n    \"password\": \"123456Aa\",\r\n    \"firstName\": \"Artem\",\r\n    \"lastName\": \"Zhadan\",\r\n    \"role\": \"USER\",\r\n    \"address\": {\r\n        \"city\": \"city\",\r\n        \"street\": \"street\",\r\n        \"house\": \"house\",\r\n        \"apartment\": \"apartment\",\r\n        \"floor\": \"floor\",\r\n        \"entrance\": \"entrance\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -253,7 +253,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{SERVICE-PATH}}/registration/confirm?token=mock_token",
+							"raw": "{{SERVICE-PATH}}/registration/confirm?token={{confirmation_token}}",
 							"host": [
 								"{{SERVICE-PATH}}"
 							],
@@ -264,7 +264,7 @@
 							"query": [
 								{
 									"key": "token",
-									"value": "mock_token"
+									"value": "{{confirmation_token}}"
 								}
 							]
 						}
@@ -305,21 +305,26 @@
 			]
 		},
 		{
-			"name": "home",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{SERVICE-PATH}}/home",
-					"host": [
-						"{{SERVICE-PATH}}"
-					],
-					"path": [
-						"home"
-					]
+			"name": "Logout",
+			"item": [
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/logout",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }

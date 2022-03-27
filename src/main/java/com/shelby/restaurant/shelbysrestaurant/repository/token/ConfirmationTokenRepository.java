@@ -1,26 +1,38 @@
 package com.shelby.restaurant.shelbysrestaurant.repository.token;
 
 import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.Delegate;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
-@Repository
-@Transactional(readOnly = true)
-public interface ConfirmationTokenRepository extends JpaRepository<ConfirmationToken, Long> {
+@Component
+@RequiredArgsConstructor
+public class ConfirmationTokenRepository {
 
-    Optional<ConfirmationToken> findByToken(String token);
+    private final MongoTemplate mongoTemplate;
 
-    @Query("SELECT t FROM ConfirmationToken t WHERE t.user = ?1")
-    Optional<ConfirmationToken> findByUser(Long userId);
+    @Delegate(types = {ConfirmationTokenMongoOperations.class, IncludeOperations.class})
+    private final ConfirmationTokenMongoOperations confirmationTokenMongoOperations;
 
-    @Transactional
-    @Modifying
-    @Query("UPDATE ConfirmationToken t SET t.confirmedAt = ?2 WHERE t.token = ?1")
-    void updateConfirmedAt(String token, LocalDateTime confirmedAt);
+    public void updateConfirmedAt(String token, LocalDateTime confirmedAt) {
+        mongoTemplate.findAndModify(
+                Query.query(Criteria.where("token").is(token)),
+                Update.update("confirmed_at", confirmedAt),
+                ConfirmationToken.class);
+    }
+
+    private abstract static class IncludeOperations implements CrudRepository<ConfirmationToken, String> {
+
+        @Override
+        @NonNull
+        public abstract <T extends ConfirmationToken> T save(@NonNull T entity);
+    }
 }

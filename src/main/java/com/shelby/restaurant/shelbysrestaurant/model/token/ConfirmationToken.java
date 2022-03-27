@@ -1,45 +1,36 @@
 package com.shelby.restaurant.shelbysrestaurant.model.token;
 
-import com.shelby.restaurant.shelbysrestaurant.model.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
-@Entity
-@Getter
-@Setter
+@Document("confirmation_tokens")
+@CompoundIndexes({@CompoundIndex(name = "id_user_id", def = "{'id' : 1, 'user_id': 1}")})
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ConfirmationToken {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false)
+    @Indexed(unique = true, background = true)
+    private String userId;
+
     private String token;
 
-    @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
     private LocalDateTime expiresAt;
 
     private LocalDateTime confirmedAt;
-
-    @ManyToOne
-    @JoinColumn(nullable = false, referencedColumnName = "id")
-    private User user;
 }

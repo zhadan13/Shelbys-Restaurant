@@ -1,23 +1,36 @@
 package com.shelby.restaurant.shelbysrestaurant.repository.product;
 
-import com.shelby.restaurant.shelbysrestaurant.model.product.Category;
 import com.shelby.restaurant.shelbysrestaurant.model.product.Product;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.Delegate;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+@Component
+@RequiredArgsConstructor
+public class ProductRepository {
 
-@Repository
-@Transactional(readOnly = true)
-public interface ProductRepository extends JpaRepository<Product, Long> {
+    private final MongoTemplate mongoTemplate;
 
-    @Transactional
-    @Modifying
-    @Query("UPDATE Product p SET p.isNew = ?2 WHERE p.id = ?1")
-    void updateIsNewStatus(Long productId, Boolean isNewStatus);
+    @Delegate(types = {ProductMongoOperations.class, IncludeOperations.class})
+    private final ProductMongoOperations productMongoOperations;
 
-    List<Product> findAllByCategory(Category category);
+    public void updateIsNewStatus(String productId, Boolean isNewStatus) {
+        mongoTemplate.findAndModify(
+                Query.query(Criteria.where("id").is(productId)),
+                Update.update("is_new", isNewStatus),
+                Product.class);
+    }
+
+    private abstract static class IncludeOperations implements CrudRepository<Product, String> {
+
+        @Override
+        @NonNull
+        public abstract <T extends Product> T save(@NonNull T entity);
+    }
 }

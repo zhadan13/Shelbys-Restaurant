@@ -1,26 +1,36 @@
 package com.shelby.restaurant.shelbysrestaurant.repository.user;
 
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.Delegate;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+@Component
+@RequiredArgsConstructor
+public class UserRepository {
 
-@Repository
-@Transactional(readOnly = true)
-public interface UserRepository extends JpaRepository<User, Long> {
+    private final MongoTemplate mongoTemplate;
 
-    Optional<User> findUserByEmail(String email);
+    @Delegate(types = {UserMongoOperations.class, IncludeOperations.class})
+    private final UserMongoOperations userMongoOperations;
 
-    Optional<User> findUserByEmailOrPhoneNumber(String email, String phoneNumber);
+    public void enableUser(String email) {
+        mongoTemplate.findAndModify(
+                Query.query(Criteria.where("email").is(email)),
+                Update.update("enabled", true),
+                User.class);
+    }
 
-    Optional<User> findUserByEmailAndPassword(String email, String password);
+    private abstract static class IncludeOperations implements CrudRepository<User, String> {
 
-    @Transactional
-    @Modifying
-    @Query("UPDATE User u SET u.enabled = TRUE WHERE u.email = ?1")
-    void enableUser(String email);
+        @Override
+        @NonNull
+        public abstract <T extends User> T save(@NonNull T entity);
+    }
 }

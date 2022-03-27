@@ -10,17 +10,17 @@ public interface ProductService {
 
     Product createProduct(ProductCreateRequest createRequest);
 
-    void updateProduct(Long productId, ProductUpdateRequest updateRequest);
+    void updateProduct(String productId, ProductUpdateRequest updateRequest);
 
-    void updateProductPopularity(Long productId);
+    void updateProductPopularity(String productId);
 
-    void updateProductIsNewStatus(Long productId, Boolean isNewStatus);
+    void updateProductIsNewStatus(String productId, Boolean isNewStatus);
 
-    Product getProductById(Long productId);
+    Product getProductById(String productId);
 
     List<Product> getAllProducts();
 
     List<Product> getProductsByCategory(String category);
 
-    void deleteProduct(Long productId);
+    void deleteProduct(String productId);
 }

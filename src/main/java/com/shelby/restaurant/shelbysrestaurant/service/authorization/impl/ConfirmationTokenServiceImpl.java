@@ -36,9 +36,9 @@ public class ConfirmationTokenServiceImpl implements ConfirmationTokenService {
     }
 
     @Override
-    public ConfirmationToken getTokenByUserId(Long userId) {
+    public ConfirmationToken getTokenByUserId(String userId) {
         log.info("Getting confirmation token by userId");
-        return confirmationTokenRepository.findByUser(userId)
+        return confirmationTokenRepository.findByUserId(userId)
                 .orElseThrow(() -> new TokenNotFoundException("Token not found!"));
     }
 

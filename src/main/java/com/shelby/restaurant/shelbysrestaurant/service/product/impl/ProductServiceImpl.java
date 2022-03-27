@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(Long productId, ProductUpdateRequest updateRequest) {
+    public void updateProduct(String productId, ProductUpdateRequest updateRequest) {
         log.info("Updating product with id {}", productId);
         productRepository.findById(productId)
                 .ifPresentOrElse(product -> {
@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Async
     @Override
-    public void updateProductPopularity(Long productId) {
+    public void updateProductPopularity(String productId) {
         log.info("Updating popularity for product with id {}", productId);
         productRepository.findById(productId)
                 .ifPresentOrElse(product -> {
@@ -62,7 +62,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Async
     @Override
-    public void updateProductIsNewStatus(Long productId, Boolean isNewStatus) {
+    public void updateProductIsNewStatus(String productId, Boolean isNewStatus) {
         log.info("Updating isNew status for product with id {}", productId);
         productRepository.findById(productId)
                 .ifPresentOrElse(product -> productRepository.updateIsNewStatus(productId, isNewStatus), () -> {
@@ -72,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(Long productId) {
+    public Product getProductById(String productId) {
         log.info("Retrieving product by id {}", productId);
         return productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException("Product with id " + productId + " not found!"));
@@ -88,13 +88,13 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductsByCategory(String category) {
         log.info("Retrieving all products by category {}", category);
         if (Arrays.stream(Category.values()).anyMatch(category1 -> category1.name().equalsIgnoreCase(category))) {
-            return productRepository.findAllByCategory(Category.valueOf(category));
+            return productRepository.findAllByCategory(Category.valueOf(category.toUpperCase()));
         }
         return Collections.emptyList();
     }
 
     @Override
-    public void deleteProduct(Long productId) {
+    public void deleteProduct(String productId) {
         log.info("Deleting product by id {}", productId);
         productRepository.findById(productId)
                 .ifPresentOrElse(productRepository::delete, () -> {

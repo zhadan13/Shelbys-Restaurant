@@ -1,11 +1,14 @@
 package com.shelby.restaurant.shelbysrestaurant.model.address;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-
-import javax.persistence.Embeddable;
+import lombok.NoArgsConstructor;
 
 @Data
-@Embeddable
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
 
     private String city;

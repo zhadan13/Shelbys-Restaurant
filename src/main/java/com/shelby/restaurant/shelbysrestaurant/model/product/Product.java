@@ -2,37 +2,29 @@ package com.shelby.restaurant.shelbysrestaurant.model.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.util.Set;
 
-@Entity
-@Getter
-@Setter
-@ToString
+@Document("products")
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Product {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
-    @Column(nullable = false)
     private String name;
 
     private String details;
 
-    @Enumerated(EnumType.STRING)
+    private Set<String> ingredients;
+
     private Category category;
 
     private Double price;

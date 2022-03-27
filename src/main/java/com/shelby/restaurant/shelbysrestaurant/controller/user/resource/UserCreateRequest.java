@@ -39,7 +39,7 @@ public class UserCreateRequest {
     @Size(min = 1)
     private String lastName;
 
-    @JsonProperty(value = "lastName")
+    @JsonProperty(value = "role")
     @NotNull
     private UserRole role;
 

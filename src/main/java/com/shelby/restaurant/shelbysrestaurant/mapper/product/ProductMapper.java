@@ -16,6 +16,7 @@ public interface ProductMapper {
 
     @Mapping(target = "name", expression = "java(request.getName())")
     @Mapping(target = "details", expression = "java(request.getDetails())")
+    @Mapping(target = "ingredients", expression = "java(request.getIngredients())")
     @Mapping(target = "category", expression = "java(request.getCategory())")
     @Mapping(target = "price", expression = "java(request.getPrice())")
     @Mapping(target = "weight", expression = "java(request.getWeight())")
@@ -23,6 +24,7 @@ public interface ProductMapper {
 
     @Mapping(target = "name", expression = "java(request.getName())")
     @Mapping(target = "details", expression = "java(request.getDetails())")
+    @Mapping(target = "ingredients", expression = "java(request.getIngredients())")
     @Mapping(target = "category", expression = "java(request.getCategory())")
     @Mapping(target = "price", expression = "java(request.getPrice())")
     @Mapping(target = "weight", expression = "java(request.getWeight())")

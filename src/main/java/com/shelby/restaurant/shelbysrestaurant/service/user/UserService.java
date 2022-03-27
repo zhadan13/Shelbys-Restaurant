@@ -11,15 +11,15 @@ public interface UserService extends UserDetailsService {
 
     User createUser(UserCreateRequest createRequest);
 
-    void updateUser(Long userId, UserUpdateRequest updateRequest);
+    void updateUser(String userId, UserUpdateRequest updateRequest);
 
-    User getUserById(Long userId);
+    User getUserById(String userId);
 
     User getUserByEmail(String email);
 
     List<User> getAllUsers();
 
-    void deleteUser(Long userId);
+    void deleteUser(String userId);
 
     void enableUser(String email);
 

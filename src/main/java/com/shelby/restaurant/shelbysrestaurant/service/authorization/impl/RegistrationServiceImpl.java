@@ -1,19 +1,26 @@
 package com.shelby.restaurant.shelbysrestaurant.service.authorization.impl;
 
+import com.mongodb.MongoCommandException;
+import com.mongodb.MongoException;
 import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserCreateRequest;
 import com.shelby.restaurant.shelbysrestaurant.exception.TokenExpiredException;
 import com.shelby.restaurant.shelbysrestaurant.exception.UserAccountAlreadyConfirmedException;
 import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
 import com.shelby.restaurant.shelbysrestaurant.service.authorization.ConfirmationTokenService;
-import com.shelby.restaurant.shelbysrestaurant.service.email.EmailService;
 import com.shelby.restaurant.shelbysrestaurant.service.authorization.RegistrationService;
+import com.shelby.restaurant.shelbysrestaurant.service.email.EmailService;
 import com.shelby.restaurant.shelbysrestaurant.service.user.UserService;
 import com.shelby.restaurant.shelbysrestaurant.util.EmailTemplates;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.mongodb.MongoTransactionException;
+import org.springframework.data.mongodb.UncategorizedMongoDbException;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -37,7 +44,10 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final EmailService emailService;
 
     @Override
-    @Transactional
+    @Transactional(value = "mongoTransactionManager", propagation = Propagation.REQUIRED)
+    @Retryable(value = {MongoCommandException.class, MongoException.class},
+            exclude = {MongoTransactionException.class, UncategorizedMongoDbException.class},
+            backoff = @Backoff(delay = 10), maxAttempts = 5)
     public String register(UserCreateRequest request) {
         log.info("Registering new user");
         User user = userService.createUser(request);
@@ -46,7 +56,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .token(token)
                 .createdAt(LocalDateTime.now())
                 .expiresAt(LocalDateTime.now().plusMinutes(tokenExpirationTime))
-                .user(user)
+                .userId(user.getId())
                 .build();
         confirmationTokenService.saveConfirmationToken(confirmationToken);
         final String link = applicationPath + CONFIRM_TOKEN_PATH + token;
@@ -56,7 +66,10 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    @Transactional
+    @Transactional(value = "mongoTransactionManager", propagation = Propagation.REQUIRED)
+    @Retryable(value = {MongoCommandException.class, MongoException.class},
+            exclude = {MongoTransactionException.class, UncategorizedMongoDbException.class},
+            backoff = @Backoff(delay = 10), maxAttempts = 5)
     public String confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenService.getToken(token);
         if (confirmationToken.getConfirmedAt() != null) {
@@ -68,8 +81,8 @@ public class RegistrationServiceImpl implements RegistrationService {
             log.error("Token expired");
             throw new TokenExpiredException("Token expired!");
         }
+        userService.enableUser(userService.getUserById(confirmationToken.getUserId()).getEmail());
         confirmationTokenService.setConfirmedAt(token);
-        userService.enableUser(confirmationToken.getUser().getEmail());
         return "confirmed";
     }
 }

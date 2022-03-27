@@ -38,18 +38,15 @@ public class LoginController {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
         authenticationToken.setDetails(new WebAuthenticationDetails(servletRequest));
-
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
         SecurityContext securityContext = SecurityContextHolder.getContext();
         securityContext.setAuthentication(authentication);
         HttpSession session = servletRequest.getSession(true);
-
-        log.debug("Session ID [{}]", RequestContextHolder.currentRequestAttributes().getSessionId());
-        log.debug("Session ID [{}]", session.getId());
-
         session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
 
-        log.debug("Logging in with [{}]", authentication.getPrincipal());
+        log.debug("Session ID {}", RequestContextHolder.currentRequestAttributes().getSessionId());
+        log.debug("Session ID {}", session.getId());
+        log.debug("Logging in with {}", authentication.getPrincipal());
 
         return ResponseEntity.ok(user);
     }

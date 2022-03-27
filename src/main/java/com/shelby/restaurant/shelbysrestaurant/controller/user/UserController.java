@@ -44,7 +44,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable String id) {
-        return ResponseEntity.ok(userService.getUserById(Long.valueOf(id)));
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PostMapping("/email")
@@ -59,13 +59,13 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody @Valid UserUpdateRequest updateRequest) {
-        userService.updateUser(Long.valueOf(id), updateRequest);
+        userService.updateUser(id, updateRequest);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable String id) {
-        userService.deleteUser(Long.valueOf(id));
+        userService.deleteUser(id);
         return ResponseEntity.ok().build();
     }
 }

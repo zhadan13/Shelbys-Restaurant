@@ -5,6 +5,8 @@ import com.shelby.restaurant.shelbysrestaurant.model.product.Category;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 @Builder
 public class ProductUpdateRequest {
@@ -14,6 +16,9 @@ public class ProductUpdateRequest {
 
     @JsonProperty(value = "details", required = true)
     private String details;
+
+    @JsonProperty(value = "ingredients", required = true)
+    private Set<String> ingredients;
 
     @JsonProperty(value = "category", required = true)
     private Category category;

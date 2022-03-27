@@ -6,8 +6,8 @@ import com.shelby.restaurant.shelbysrestaurant.exception.UserAccountNotEnabledEx
 import com.shelby.restaurant.shelbysrestaurant.model.token.ConfirmationToken;
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
 import com.shelby.restaurant.shelbysrestaurant.service.authorization.ConfirmationTokenService;
-import com.shelby.restaurant.shelbysrestaurant.service.email.EmailService;
 import com.shelby.restaurant.shelbysrestaurant.service.authorization.LoginService;
+import com.shelby.restaurant.shelbysrestaurant.service.email.EmailService;
 import com.shelby.restaurant.shelbysrestaurant.service.user.UserService;
 import com.shelby.restaurant.shelbysrestaurant.util.EmailTemplates;
 import lombok.RequiredArgsConstructor;

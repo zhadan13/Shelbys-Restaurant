@@ -468,7 +468,7 @@
 					"response": []
 				},
 				{
-					"name": "updateProductPopularity Copy",
+					"name": "updateProductPopularity",
 					"request": {
 						"method": "PATCH",
 						"header": [],

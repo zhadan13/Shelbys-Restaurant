@@ -22,8 +22,8 @@ public class ConfirmationTokenRepository {
     @Delegate(types = {ConfirmationTokenMongoOperations.class, IncludeOperations.class})
     private final ConfirmationTokenMongoOperations confirmationTokenMongoOperations;
 
-    public void updateConfirmedAt(String token, LocalDateTime confirmedAt) {
-        mongoTemplate.findAndModify(
+    public ConfirmationToken updateConfirmedAt(String token, LocalDateTime confirmedAt) {
+        return mongoTemplate.findAndModify(
                 Query.query(Criteria.where("token").is(token)),
                 Update.update("confirmed_at", confirmedAt),
                 ConfirmationToken.class);

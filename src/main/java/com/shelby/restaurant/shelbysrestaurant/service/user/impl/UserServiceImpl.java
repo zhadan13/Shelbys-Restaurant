@@ -8,6 +8,8 @@ import com.shelby.restaurant.shelbysrestaurant.exception.ValidationException;
 import com.shelby.restaurant.shelbysrestaurant.mapper.user.UserMapper;
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
 import com.shelby.restaurant.shelbysrestaurant.repository.user.UserRepository;
+import com.shelby.restaurant.shelbysrestaurant.service.authorization.ConfirmationTokenService;
+import com.shelby.restaurant.shelbysrestaurant.service.order.OrderService;
 import com.shelby.restaurant.shelbysrestaurant.service.user.UserService;
 import com.shelby.restaurant.shelbysrestaurant.service.validation.EmailValidator;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.concurrent.CompletableFuture.runAsync;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -29,6 +33,8 @@ public class UserServiceImpl implements UserService {
     private final EmailValidator emailValidator;
     private final UserMapper userMapper;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ConfirmationTokenService confirmationTokenService;
+    private final OrderService orderService;
 
     @Override
     public User createUser(UserCreateRequest createRequest) {
@@ -47,16 +53,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(String userId, UserUpdateRequest userUpdateRequest) {
+    public User updateUser(String userId, UserUpdateRequest userUpdateRequest) {
         log.info("Updating user with id {}", userId);
-        userRepository.findById(userId)
-                .ifPresentOrElse(user -> {
-                    userMapper.mapUserUpdateRequestToUser(userUpdateRequest, user);
-                    userRepository.save(user);
-                }, () -> {
-                    log.error("User with id {} not found", userId);
-                    throw new UserNotFoundException("User with id " + userId + " not found!");
-                });
+        return userRepository.findById(userId).map(user -> {
+            userMapper.mapUserUpdateRequestToUser(userUpdateRequest, user);
+            return userRepository.save(user);
+        }).orElseGet(() -> {
+            log.error("User with id {} not found", userId);
+            throw new UserNotFoundException("User with id " + userId + " not found!");
+        });
     }
 
     @Override
@@ -86,11 +91,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(String userId) {
         log.info("Deleting user by id {}", userId);
-        userRepository.findById(userId)
-                .ifPresentOrElse(userRepository::delete, () -> {
-                    log.error("User with id " + userId + " not found");
-                    throw new UserNotFoundException("User with id " + userId + " not found!");
-                });
+        userRepository.findById(userId).ifPresentOrElse(user -> {
+            userRepository.delete(user);
+            runAsync(() -> {
+                confirmationTokenService.deleteConfirmationTokenByUserId(userId);
+                orderService.deleteUsersOrders(userId);
+            });
+        }, () -> {
+            log.error("User with id " + userId + " not found");
+            throw new UserNotFoundException("User with id " + userId + " not found!");
+        });
     }
 
     @Override

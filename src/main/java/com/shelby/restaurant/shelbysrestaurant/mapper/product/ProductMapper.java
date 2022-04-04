@@ -22,6 +22,7 @@ public interface ProductMapper {
     @Mapping(target = "category", expression = "java(request.getCategory())")
     @Mapping(target = "price", expression = "java(request.getPrice())")
     @Mapping(target = "weight", expression = "java(request.getWeight())")
+    @Mapping(target = "averageCookingTimeInMinutes", expression = "java(request.getAverageCookingTimeInMinutes())")
     @Mapping(target = "popularity", constant = "0")
     @Mapping(target = "isNew", constant = "true")
     @Mapping(target = "addedAt", expression = "java(LocalDateTime.now())")
@@ -33,6 +34,7 @@ public interface ProductMapper {
     @Mapping(target = "category", expression = "java(request.getCategory())")
     @Mapping(target = "price", expression = "java(request.getPrice())")
     @Mapping(target = "weight", expression = "java(request.getWeight())")
+    @Mapping(target = "averageCookingTimeInMinutes", expression = "java(request.getAverageCookingTimeInMinutes())")
     @Mapping(target = "popularity", expression = "java(request.getPopularity())")
     @Mapping(target = "isNew", expression = "java(request.getIsNew())")
     void mapProductUpdateRequestToProduct(ProductUpdateRequest request, @MappingTarget Product product);

@@ -58,10 +58,9 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable String id,
-                                           @RequestBody @Valid ProductUpdateRequest updateRequest) {
-        productService.updateProduct(id, updateRequest);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Product> updateProduct(@PathVariable String id,
+                                                 @RequestBody @Valid ProductUpdateRequest updateRequest) {
+        return ResponseEntity.ok(productService.updateProduct(id, updateRequest));
     }
 
     @PatchMapping("/{id}/popularity")

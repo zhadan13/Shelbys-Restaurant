@@ -55,4 +55,22 @@ public class ConfirmationTokenServiceImpl implements ConfirmationTokenService {
         log.info("Updating confirmation token status");
         confirmationTokenRepository.updateConfirmedAt(token, LocalDateTime.now());
     }
+
+    @Override
+    public void deleteConfirmationToken(String id) {
+        log.info("Deleting confirmation token with id {}", id);
+        confirmationTokenRepository.findById(id).ifPresentOrElse(confirmationTokenRepository::delete, () -> {
+            log.error("Token with id {} not found", id);
+            throw new TokenNotFoundException("Token with id " + id + " not found!");
+        });
+    }
+
+    @Override
+    public void deleteConfirmationTokenByUserId(String userId) {
+        log.info("Deleting confirmation token by userId {}", userId);
+        confirmationTokenRepository.findByUserId(userId).ifPresentOrElse(confirmationTokenRepository::delete, () -> {
+            log.error("Token with userid {} not found", userId);
+            throw new TokenNotFoundException("Token with userId " + userId + " not found!");
+        });
+    }
 }

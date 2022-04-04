@@ -20,8 +20,8 @@ public class UserRepository {
     @Delegate(types = {UserMongoOperations.class, IncludeOperations.class})
     private final UserMongoOperations userMongoOperations;
 
-    public void enableUser(String email) {
-        mongoTemplate.findAndModify(
+    public User enableUser(String email) {
+        return mongoTemplate.findAndModify(
                 Query.query(Criteria.where("email").is(email)),
                 Update.update("enabled", true),
                 User.class);

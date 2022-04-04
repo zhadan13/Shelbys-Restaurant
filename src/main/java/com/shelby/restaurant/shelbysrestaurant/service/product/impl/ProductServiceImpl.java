@@ -34,16 +34,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(String productId, ProductUpdateRequest updateRequest) {
+    public Product updateProduct(String productId, ProductUpdateRequest updateRequest) {
         log.info("Updating product with id {}", productId);
-        productRepository.findById(productId)
-                .ifPresentOrElse(product -> {
-                    productMapper.mapProductUpdateRequestToProduct(updateRequest, product);
-                    productRepository.save(product);
-                }, () -> {
-                    log.error("Product with id {} not found", productId);
-                    throw new ProductNotFoundException("Product with id " + productId + " not found!");
-                });
+        return productRepository.findById(productId).map(product -> {
+            productMapper.mapProductUpdateRequestToProduct(updateRequest, product);
+            return productRepository.save(product);
+        }).orElseGet(() -> {
+            log.error("Product with id {} not found", productId);
+            throw new ProductNotFoundException("Product with id " + productId + " not found!");
+        });
     }
 
     @Async

@@ -32,6 +32,8 @@ public class Product {
 
     private Double weight;
 
+    private Double averageCookingTimeInMinutes;
+
     private Integer popularity;
 
     private Boolean isNew;

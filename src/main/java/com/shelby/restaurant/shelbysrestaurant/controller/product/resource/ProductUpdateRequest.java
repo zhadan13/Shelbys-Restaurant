@@ -29,6 +29,9 @@ public class ProductUpdateRequest {
     @JsonProperty(value = "weight", required = true)
     private Double weight;
 
+    @JsonProperty(value = "averageCookingTimeInMinutes", required = true)
+    private Double averageCookingTimeInMinutes;
+
     @JsonProperty(value = "popularity", required = true)
     private Integer popularity;
 

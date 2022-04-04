@@ -1,6 +1,7 @@
 package com.shelby.restaurant.shelbysrestaurant.exception.handler;
 
 import com.shelby.restaurant.shelbysrestaurant.exception.InvalidCredentialsException;
+import com.shelby.restaurant.shelbysrestaurant.exception.OrderNotFoundException;
 import com.shelby.restaurant.shelbysrestaurant.exception.ProductNotFoundException;
 import com.shelby.restaurant.shelbysrestaurant.exception.TokenExpiredException;
 import com.shelby.restaurant.shelbysrestaurant.exception.TokenNotFoundException;
@@ -27,7 +28,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
     }
 
     @ExceptionHandler(value = {UserNotFoundException.class, TokenNotFoundException.class,
-            ProductNotFoundException.class})
+            ProductNotFoundException.class, OrderNotFoundException.class})
     protected ResponseEntity<?> handleNotFoundException(RuntimeException e, WebRequest request) {
         return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }

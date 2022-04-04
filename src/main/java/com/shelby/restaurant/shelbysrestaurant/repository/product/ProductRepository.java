@@ -20,8 +20,8 @@ public class ProductRepository {
     @Delegate(types = {ProductMongoOperations.class, IncludeOperations.class})
     private final ProductMongoOperations productMongoOperations;
 
-    public void updateIsNewStatus(String productId, Boolean isNewStatus) {
-        mongoTemplate.findAndModify(
+    public Product updateIsNewStatus(String productId, Boolean isNewStatus) {
+        return mongoTemplate.findAndModify(
                 Query.query(Criteria.where("id").is(productId)),
                 Update.update("is_new", isNewStatus),
                 Product.class);

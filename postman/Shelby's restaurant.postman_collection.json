@@ -336,7 +336,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Pepperoni\",\r\n    \"details\": \"Pepperoni the best\",\r\n    \"ingredients\": [\"Pepperoni\", \"Cheese\"],\r\n    \"category\": \"PIZZA\",\r\n    \"price\": \"8\",\r\n    \"weight\": \"800\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Pepperoni\",\r\n    \"details\": \"Pepperoni the best\",\r\n    \"ingredients\": [\"Pepperoni\", \"Cheese\"],\r\n    \"category\": \"PIZZA\",\r\n    \"price\": \"8\",\r\n    \"weight\": \"800\",\r\n    \"averageCookingTimeInMinutes\": \"30\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -362,7 +362,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Pepperoni\",\r\n    \"details\": \"Pepperoni the best\",\r\n    \"ingredients\": [\"Pepperoni\", \"Cheese\"],\r\n    \"category\": \"PIZZA\",\r\n    \"price\": \"8\",\r\n    \"weight\": \"800\",\r\n    \"popularity\": \"100\",\r\n    \"isNew\": \"true\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Pepperoni\",\r\n    \"details\": \"Pepperoni the best\",\r\n    \"ingredients\": [\"Pepperoni\", \"Cheese\"],\r\n    \"category\": \"PIZZA\",\r\n    \"price\": \"8\",\r\n    \"weight\": \"800\",\r\n    \"averageCookingTimeInMinutes\": \"30\",\r\n    \"popularity\": \"100\",\r\n    \"isNew\": \"true\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -481,6 +481,174 @@
 								"products",
 								"{{product_id}}",
 								"popularity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "getOrders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/orders",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "{{user_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/orders/{{order_id}}",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"orders",
+								"{{order_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"62402a010c5c4c7d9608354b\",\r\n    \"status\": \"ACCEPTED\",\r\n    \"address\": {\r\n            \"city\": \"city\",\r\n            \"street\": \"street\",\r\n            \"house\": \"house\",\r\n            \"apartment\": \"apartment\",\r\n            \"floor\": \"floor\",\r\n            \"entrance\": \"entrance\"\r\n        },\r\n    \"paymentType\": \"CASH\",\r\n    \"cost\": \"500\",\r\n    \"deliveryCost\": \"0\",\r\n    \"paymentId\": \"mock_payment_id\",\r\n    \"estimatedCompleteAt\": \"2022-04-04T17:41:18.5419356\",\r\n    \"targetDeliveryAt\": \"2022-04-04T17:41:18.5419356\",\r\n    \"products\": {\r\n        \"624049d70869ba70e031a6f1\": \"1\"\r\n    },\r\n    \"details\": \"details\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVICE-PATH}}/orders",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "estimateOrderCompletion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": {\r\n        \"city\": \"city\",\r\n        \"street\": \"street\",\r\n        \"house\": \"house\",\r\n        \"apartment\": \"apartment\",\r\n        \"floor\": \"floor\",\r\n        \"entrance\": \"entrance\"\r\n    },\r\n    \"targetDeliveryAt\": \"\",\r\n    \"products\": {\r\n        \"624049d70869ba70e031a6f1\": \"1\"\r\n    },\r\n    \"details\": \"details\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVICE-PATH}}/orders/estimate",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"orders",
+								"estimate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrderStatus",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/orders/{{order_id}}/status?status={{status}}",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"orders",
+								"{{order_id}}",
+								"status"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "{{status}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrderCompletion",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/orders/{{order_id}}/completion?completedAt={{completed_at}}",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"orders",
+								"{{order_id}}",
+								"completion"
+							],
+							"query": [
+								{
+									"key": "completedAt",
+									"value": "{{completed_at}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrder",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SERVICE-PATH}}/orders/{{order_id}}",
+							"host": [
+								"{{SERVICE-PATH}}"
+							],
+							"path": [
+								"orders",
+								"{{order_id}}"
 							]
 						}
 					},

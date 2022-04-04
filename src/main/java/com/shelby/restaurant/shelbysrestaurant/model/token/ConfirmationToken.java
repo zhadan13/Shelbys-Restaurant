@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 @Document("confirmation_tokens")
-@CompoundIndexes({@CompoundIndex(name = "id_user_id", def = "{'id' : 1, 'user_id': 1}")})
+@CompoundIndexes({@CompoundIndex(name = "token_id_user_id", def = "{'id' : 1, 'user_id': 1}", unique = true)})
 @Data
 @Builder
 @NoArgsConstructor

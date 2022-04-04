@@ -33,4 +33,8 @@ public class ProductCreateRequest {
     @JsonProperty(value = "weight", required = true)
     @NotNull
     private Double weight;
+
+    @JsonProperty(value = "averageCookingTimeInMinutes", required = true)
+    @NotNull
+    private Double averageCookingTimeInMinutes;
 }

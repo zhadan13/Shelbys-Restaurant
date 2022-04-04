@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Document("users")
-@CompoundIndexes({@CompoundIndex(name = "email_password", def = "{'email' : 1, 'password': 1}")})
+@CompoundIndexes({@CompoundIndex(name = "email_password", def = "{'email' : 1, 'password': 1}", unique = true)})
 @Data
 @Builder
 @NoArgsConstructor

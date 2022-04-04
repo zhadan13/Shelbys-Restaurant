@@ -10,7 +10,7 @@ public interface ProductService {
 
     Product createProduct(ProductCreateRequest createRequest);
 
-    void updateProduct(String productId, ProductUpdateRequest updateRequest);
+    Product updateProduct(String productId, ProductUpdateRequest updateRequest);
 
     void updateProductPopularity(String productId);
 

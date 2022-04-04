@@ -13,4 +13,8 @@ public interface ConfirmationTokenService {
     ConfirmationToken refreshToken(ConfirmationToken token);
 
     void setConfirmedAt(String token);
+
+    void deleteConfirmationToken(String id);
+
+    void deleteConfirmationTokenByUserId(String userId);
 }

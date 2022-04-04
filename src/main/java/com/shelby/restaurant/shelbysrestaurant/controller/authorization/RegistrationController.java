@@ -1,9 +1,11 @@
 package com.shelby.restaurant.shelbysrestaurant.controller.authorization;
 
 import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserCreateRequest;
+import com.shelby.restaurant.shelbysrestaurant.security.Permissions;
 import com.shelby.restaurant.shelbysrestaurant.service.authorization.RegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,7 @@ public class RegistrationController {
 
     private final RegistrationService registrationService;
 
+    @PreAuthorize(Permissions.GLOBAL_SCOPE)
     @PostMapping
     public ResponseEntity<String> register(@RequestBody @Valid UserCreateRequest request) {
         return ResponseEntity.ok(registrationService.register(request));

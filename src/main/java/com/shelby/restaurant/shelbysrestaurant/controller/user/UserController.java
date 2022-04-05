@@ -4,11 +4,13 @@ import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.GetUserR
 import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserCreateRequest;
 import com.shelby.restaurant.shelbysrestaurant.controller.user.resource.UserUpdateRequest;
 import com.shelby.restaurant.shelbysrestaurant.model.user.User;
+import com.shelby.restaurant.shelbysrestaurant.security.Permissions;
 import com.shelby.restaurant.shelbysrestaurant.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@PreAuthorize(Permissions.GLOBAL_SCOPE)
 @RequiredArgsConstructor
 public class UserController {
 

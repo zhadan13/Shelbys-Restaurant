@@ -3,12 +3,14 @@ package com.shelby.restaurant.shelbysrestaurant.controller.order;
 import com.shelby.restaurant.shelbysrestaurant.controller.order.resource.OrderCreateRequest;
 import com.shelby.restaurant.shelbysrestaurant.model.order.Order;
 import com.shelby.restaurant.shelbysrestaurant.model.order.OrderEstimationDetails;
+import com.shelby.restaurant.shelbysrestaurant.security.Permissions;
 import com.shelby.restaurant.shelbysrestaurant.service.order.OrderCompletionEstimationService;
 import com.shelby.restaurant.shelbysrestaurant.service.order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -27,6 +29,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
+@PreAuthorize(Permissions.GLOBAL_SCOPE)
 @RequiredArgsConstructor
 public class OrderController {
 

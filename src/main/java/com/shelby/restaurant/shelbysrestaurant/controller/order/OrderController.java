@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -63,21 +64,21 @@ public class OrderController {
     }
 
     @PatchMapping("/{id}/status")
-    public ResponseEntity<?> updateOrderStatus(@PathVariable String id, @RequestParam String status) {
+    @ResponseStatus(HttpStatus.OK)
+    public void updateOrderStatus(@PathVariable String id, @RequestParam String status) {
         orderService.updateOrderStatus(id, status);
-        return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{id}/completion")
-    public ResponseEntity<?> updateOrderCompletion(@PathVariable String id, @RequestParam String completedAt) {
+    @ResponseStatus(HttpStatus.OK)
+    public void updateOrderCompletion(@PathVariable String id, @RequestParam String completedAt) {
         orderService.updateOrderCompletedAtTime(id, completedAt);
-        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteOrder(@PathVariable String id) {
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteOrder(@PathVariable String id) {
         orderService.deleteOrder(id);
-        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/estimate")

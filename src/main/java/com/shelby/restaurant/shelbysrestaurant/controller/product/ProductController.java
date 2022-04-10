@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -67,20 +68,20 @@ public class ProductController {
     }
 
     @PatchMapping("/{id}/popularity")
-    public ResponseEntity<?> updateProductPopularity(@PathVariable String id) {
+    @ResponseStatus(HttpStatus.OK)
+    public void updateProductPopularity(@PathVariable String id) {
         productService.updateProductPopularity(id);
-        return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{id}/status")
-    public ResponseEntity<?> updateProductIsNewStatus(@PathVariable String id, @RequestParam String status) {
+    @ResponseStatus(HttpStatus.OK)
+    public void updateProductIsNewStatus(@PathVariable String id, @RequestParam String status) {
         productService.updateProductIsNewStatus(id, Boolean.valueOf(status));
-        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable String id) {
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteProduct(@PathVariable String id) {
         productService.deleteProduct(id);
-        return ResponseEntity.ok().build();
     }
 }

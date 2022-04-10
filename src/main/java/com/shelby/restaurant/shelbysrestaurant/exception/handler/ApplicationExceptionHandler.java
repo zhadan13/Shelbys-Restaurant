@@ -21,25 +21,24 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {ValidationException.class, TokenExpiredException.class,
-            InvalidCredentialsException.class})
-    protected ResponseEntity<?> handleBadRequestException(RuntimeException e, WebRequest request) {
+    @ExceptionHandler(value = {ValidationException.class, TokenExpiredException.class, InvalidCredentialsException.class})
+    protected ResponseEntity<Object> handleBadRequestException(RuntimeException e, WebRequest request) {
         return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
-    @ExceptionHandler(value = {UserNotFoundException.class, TokenNotFoundException.class,
-            ProductNotFoundException.class, OrderNotFoundException.class})
-    protected ResponseEntity<?> handleNotFoundException(RuntimeException e, WebRequest request) {
+    @ExceptionHandler(value = {UserNotFoundException.class, TokenNotFoundException.class, ProductNotFoundException.class,
+            OrderNotFoundException.class})
+    protected ResponseEntity<Object> handleNotFoundException(RuntimeException e, WebRequest request) {
         return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
     @ExceptionHandler(value = {UserAlreadyExistsException.class, UserAccountAlreadyConfirmedException.class})
-    protected ResponseEntity<?> handleConflictException(RuntimeException e, WebRequest request) {
+    protected ResponseEntity<Object> handleConflictException(RuntimeException e, WebRequest request) {
         return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
     @ExceptionHandler(value = {UserAccountNotEnabledException.class})
-    protected ResponseEntity<?> handleUnauthorizedException(RuntimeException e, WebRequest request) {
+    protected ResponseEntity<Object> handleUnauthorizedException(RuntimeException e, WebRequest request) {
         return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }
 }
